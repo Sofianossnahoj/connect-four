@@ -1,5 +1,7 @@
 <template>
   <main>
+    <Navigation />
+    <span class="current">{{ currentPlayerText }}</span>
     <div class="game" @click="getRow">
       <div class="circle" data-col="0" data-row="0"></div>
       <div class="circle" data-col="0" data-row="1"></div>
@@ -48,19 +50,65 @@
 </template>
 
 <script>
-// import board from '../game/board.js'
+import Navigation from '../components/Navigation.vue'
+
+import { playPiece, checkForWin } from '../game/mechanics.js'
 
 export default {
+  components: {
+    Navigation
+  },
   data() {
     return {
-      playable: true
+      playable: true,
+      playerOne: 'Jack',
+      playerTwo: 'Robin',
+      currentPlayer: 1,
+      winner: 0
+    }
+  },
+  computed: {
+    currentPlayerText() {
+      if (this.winner === 0) {
+        if (this.currentPlayer === 1) {
+          return this.playerOne + 's tur';
+        } else {
+          return this.playerTwo + 's tur';
+        }
+      } else {
+        if (this.winner === 1) {
+          return this.playerOne + ' vann!';
+        } else {
+          return this.playerTwo + ' vann!';
+        }
+      }
     }
   },
   methods: {
     getRow(e) {
-      const row = Number(e.target.getAttribute('data-row'));
+      const row = e.target.getAttribute('data-row');
       if (this.playable && row !== null) {
-        console.log(row);
+        const played = playPiece(row, this.currentPlayer);
+        if (played) {
+          this.winner = checkForWin();
+          this.switchPlayer();
+        }
+      }
+    },
+    switchPlayer() {
+      if (!this.playable) return
+      if (this.currentPlayer === 1) {
+        this.currentPlayer = 2
+      } else {
+        this.currentPlayer = 1
+      }
+    }
+  },
+  watch: {
+    winner() {
+      if (this.winner !== 0) {
+        console.log('Player ' + this.winner + ' won!!!');
+        this.playable = false;
       }
     }
   }
@@ -71,11 +119,13 @@ export default {
 main {
   width: 100vw;
   height: 100vh;
-  display: grid;
-  place-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 div.game {
+  margin-top: 2rem;
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   gap: 10px;
@@ -97,6 +147,12 @@ div.game div.player-one {
 
 div.game div.player-two {
   background-color: #DECF98;
+}
+
+span.current {
+  font-family: 'Ribeye', cursive;
+  font-size: 2rem;
+  margin-top: 2rem;
 }
 
 @media screen and (max-width: 500px) {
