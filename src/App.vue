@@ -32,6 +32,7 @@ body {
   height: 100vh;
   margin: 0;
   padding: 0;
+  background-color: #B6D4C6;
 }
 
 #app {
