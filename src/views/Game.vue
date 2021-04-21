@@ -1,6 +1,7 @@
 <template>
   <main>
     <Navigation />
+    <span class="current">{{ currentPlayerText }}</span>
     <div class="game" @click="getRow">
       <div class="circle" data-col="0" data-row="0"></div>
       <div class="circle" data-col="0" data-row="1"></div>
@@ -60,10 +61,27 @@ export default {
   data() {
     return {
       playable: true,
-      playerOne: 'Player 1',
-      playerTwo: 'Player 2',
+      playerOne: 'Jack',
+      playerTwo: 'Robin',
       currentPlayer: 1,
       winner: 0
+    }
+  },
+  computed: {
+    currentPlayerText() {
+      if (this.winner === 0) {
+        if (this.currentPlayer === 1) {
+          return this.playerOne + 's tur';
+        } else {
+          return this.playerTwo + 's tur';
+        }
+      } else {
+        if (this.winner === 1) {
+          return this.playerOne + ' vann!';
+        } else {
+          return this.playerTwo + ' vann!';
+        }
+      }
     }
   },
   methods: {
@@ -107,7 +125,7 @@ main {
 }
 
 div.game {
-  margin-top: 5rem;
+  margin-top: 2rem;
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   gap: 10px;
@@ -129,6 +147,12 @@ div.game div.player-one {
 
 div.game div.player-two {
   background-color: #DECF98;
+}
+
+span.current {
+  font-family: 'Ribeye', cursive;
+  font-size: 2rem;
+  margin-top: 2rem;
 }
 
 @media screen and (max-width: 500px) {
