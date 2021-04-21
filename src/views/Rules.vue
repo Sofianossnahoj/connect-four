@@ -1,5 +1,18 @@
 <template>
-  <div>
-    <h1>This is the rules page</h1>
-  </div>
+    <main>
+    <h1>Regler</h1>
+  </main>
 </template>
+
+<script>
+export default {
+
+}
+</script>
+
+<style scoped>
+main {
+  width: 100vw;
+  height: 100vh;
+}
+</style>
