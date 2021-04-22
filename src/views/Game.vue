@@ -46,6 +46,17 @@
       <div class="circle" data-col="5" data-row="5"></div>
       <div class="circle" data-col="5" data-row="6"></div>
     </div>
+
+    <section class="info">
+      <div>
+        <p><span class="piece">&#9679;</span>Spelare: {{ playerOne }}</p>
+        <p>Antal drag: {{ countPlayerOne }}</p>
+      </div>
+      <div>
+        <p>Spelare: {{ playerTwo }}<span class="piece">&#9679;</span></p>
+        <p>Antal drag: {{ countPlayerTwo }}</p>
+      </div>
+    </section>
   </main>
 </template>
 
@@ -64,7 +75,9 @@ export default {
       playerOne: 'Jack',
       playerTwo: 'Robin',
       currentPlayer: 1,
-      winner: 0
+      winner: 0,
+      countPlayerOne: 0,
+      countPlayerTwo: 0
     }
   },
   computed: {
@@ -91,16 +104,24 @@ export default {
         const played = playPiece(row, this.currentPlayer);
         if (played) {
           this.winner = checkForWin();
+          this.increaseCount();
           this.switchPlayer();
         }
       }
     },
-    switchPlayer() {
-      if (!this.playable) return
+    increaseCount() {
       if (this.currentPlayer === 1) {
-        this.currentPlayer = 2
+        this.countPlayerOne ++;
       } else {
-        this.currentPlayer = 1
+        this.countPlayerTwo ++;
+      }
+    },
+    switchPlayer() {
+      if (!this.playable) return;
+      if (this.currentPlayer === 1) {
+        this.currentPlayer = 2;
+      } else {
+        this.currentPlayer = 1;
       }
     }
   },
@@ -153,6 +174,46 @@ span.current {
   font-family: 'Ribeye', cursive;
   font-size: 2rem;
   margin-top: 2rem;
+}
+
+section.info {
+  display: flex;
+  margin-top: 1rem;
+  font-family: 'Rajdhani', sans-serif;
+  padding-bottom: 1rem;
+}
+
+section.info div {
+  width: 200px;
+  padding: 0 1rem;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+section.info div:first-of-type {
+  align-items: flex-end;
+  border-right: solid 1px;
+}
+
+section.info p {
+  margin: 0;
+}
+
+section.info p:first-of-type {
+  display: flex;
+  align-items: center;
+}
+
+section.info span.piece {
+  font-size: 3rem;
+  color: #EE9292;
+  margin: 0 0.5rem;
+  line-height: 0;
+}
+
+section.info div:nth-child(2) span {
+  color: #DECF98;
 }
 
 @media screen and (max-width: 500px) {
