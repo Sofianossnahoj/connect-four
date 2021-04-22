@@ -23,6 +23,7 @@ export function playPiece(row, current) {
 function setBoard(col, row) {
   board[col][row] = currentPlayer;
   const circle = document.querySelector(`[data-col="${col}"][data-row="${row}"]`);
+  circle.classList.add('move');
   if (currentPlayer === 1) {
     circle.classList.add('player-one');
   } else {
