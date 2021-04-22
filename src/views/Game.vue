@@ -3,6 +3,7 @@
     <Navigation />
     <span class="current">{{ currentPlayerText }}</span>
     <section class="game">
+    <img src="@/assets/skeleton.png" alt="">
     <div class="game" @click="getRow">
       <div class="circle" data-col="0" data-row="0"></div>
       <div class="circle" data-col="0" data-row="1"></div>
@@ -46,50 +47,6 @@
       <div class="circle" data-col="5" data-row="4"></div>
       <div class="circle" data-col="5" data-row="5"></div>
       <div class="circle" data-col="5" data-row="6"></div>
-    </div>
-    <div class="game-background">
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
     </div>
     </section>
 
@@ -209,11 +166,10 @@ main {
 
 section.game {
   position: relative;
+  margin-top: 2rem;
 }
 
-div.game,
-div.game-background {
-  margin-top: 2rem;
+div.game {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   gap: 10px;
@@ -221,19 +177,16 @@ div.game-background {
   overflow: hidden;
 }
 
-div.game-background {
-  background-color: #407378;
-}
-
-div.game-background {
+section.game img {
+  pointer-events: none;
   position: absolute;
-  z-index: -1;
+  z-index: 999;
+  width: 100%;
   left: 0;
   top: 0;
 }
 
-div.game div,
-div.game-background div {
+div.game div {
   width: 60px;
   height: 60px;
   background-color: #B6D4C6;
@@ -313,7 +266,7 @@ section.info div:nth-child(2) span {
 }
 
 .move {
-  animation: move 1s ease;
+  animation: move 0.5s ease;
 }
 
 @keyframes move {
