@@ -2,6 +2,7 @@
   <main>
     <Navigation />
     <span class="current">{{ currentPlayerText }}</span>
+    <section class="game">
     <div class="game" @click="getRow">
       <div class="circle" data-col="0" data-row="0"></div>
       <div class="circle" data-col="0" data-row="1"></div>
@@ -46,6 +47,51 @@
       <div class="circle" data-col="5" data-row="5"></div>
       <div class="circle" data-col="5" data-row="6"></div>
     </div>
+    <div class="game-background">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+    </section>
 
     <section class="info">
       <div>
@@ -64,6 +110,7 @@
 import Navigation from '../components/Navigation.vue'
 
 import { playPiece, checkForWin } from '../game/mechanics.js'
+import { playAIPiece } from '../game/ai.js'
 
 export default {
   components: {
@@ -72,8 +119,9 @@ export default {
   data() {
     return {
       playable: true,
+      versusAI: true,
       playerOne: 'Jack',
-      playerTwo: 'Robin',
+      playerTwo: 'AI',
       currentPlayer: 1,
       winner: 0,
       countPlayerOne: 0,
@@ -120,15 +168,29 @@ export default {
       if (!this.playable) return;
       if (this.currentPlayer === 1) {
         this.currentPlayer = 2;
+        if (this.versusAI) {
+          this.playAI();
+        }
       } else {
         this.currentPlayer = 1;
+      }
+    },
+    playAI() {
+      this.playable = false;
+      if (this.winner === 0) {
+        setTimeout(() => {
+          playAIPiece();
+          this.winner = checkForWin();
+          this.increaseCount();
+          this.currentPlayer = 1;
+          this.playable = true;
+        }, 1000);
       }
     }
   },
   watch: {
     winner() {
       if (this.winner !== 0) {
-        console.log('Player ' + this.winner + ' won!!!');
         this.playable = false;
       }
     }
@@ -145,16 +207,33 @@ main {
   align-items: center;
 }
 
-div.game {
+section.game {
+  position: relative;
+}
+
+div.game,
+div.game-background {
   margin-top: 2rem;
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   gap: 10px;
   padding: 10px;
+  overflow: hidden;
+}
+
+div.game-background {
   background-color: #407378;
 }
 
-div.game div {
+div.game-background {
+  position: absolute;
+  z-index: -1;
+  left: 0;
+  top: 0;
+}
+
+div.game div,
+div.game-background div {
   width: 60px;
   height: 60px;
   background-color: #B6D4C6;
@@ -210,6 +289,7 @@ section.info span.piece {
   color: #EE9292;
   margin: 0 0.5rem;
   line-height: 0;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 section.info div:nth-child(2) span {
@@ -226,6 +306,22 @@ section.info div:nth-child(2) span {
     width: 100vw;
     gap: calc(100vw * 0.02); /* Each gap is 2% of the total width to be consistent */
     padding: calc(100vw * 0.02);
+  }
+  section.info div {
+    width: 50vw;
+  }
+}
+
+.move {
+  animation: move 1s ease;
+}
+
+@keyframes move {
+  0% {
+    transform: translateY(-430px);
+  }
+  100% {
+    transform: translateY(0px);
   }
 }
 </style>
