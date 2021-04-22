@@ -1,48 +1,37 @@
 <template>
   <div class="nav-bar">
-
-    <button @click="navOpen = !navOpen" class ="hamburger-nav">
-        &#9776;
+    
+    <button @click="navOpen = !navOpen" class="hamburger-nav">
+      <span v-if="!navOpen">&#9776;</span>
+      <span v-else>&#x2715;</span>
     </button>
 
     <div class="title">
       <h1 class="corner-title">FYRA I RAD</h1>
     </div>
 
-    <div class="nav-menu">
-      
+    <div class="nav-menu">  
       <button class="menu-button" @click="goToPage('/')">HEM</button>
-
       <button class="menu-button" @click="goToPage('/rules')">REGLER</button>
-
       <button class="menu-button" @click="goToPage('/history')">HISTORIA</button>
-
       <button class="menu-button" @click="goToPage('/highscore')">TOPP 10</button>
-
     </div>
 
-    <div class="nav-expanded">
-
+    <div class="nav-expanded" v-if="navOpen">
       <button class="menu-button" @click="goToPage('/')">HEM</button>
-
       <button class="menu-button" @click="goToPage('/rules')">REGLER</button>
-
       <button class="menu-button" @click="goToPage('/history')">HISTORIA</button>
-
       <button class="menu-button" @click="goToPage('/highscore')">TOPP 10</button>
-
     </div>
-
- 
 
   </div>
 </template>
 
 <script>
 export default {
-   data: function () {
+   data() {
     return {
-      navOpen: true,
+      navOpen: false,
     };
   },
   methods: {
@@ -52,14 +41,6 @@ export default {
         this.$router.push(page);
       }
     }
-    /* goToPage(page) {
-      const currentPage = this.$route.path;
-      if (currentPage === page) {
-        this.$emit('close-nav');
-      } else {
-        this.$router.push(page);
-      }
-    }*/
   }
 };
 </script>
@@ -105,25 +86,27 @@ export default {
 }
 
 .hamburger-nav {
- color: #407378;
- font-size: 2.5rem;
- margin-left: 1rem;
- margin-bottom: .3rem;
- background-color:  #b6d4c6;
- border: 0;
- outline: 0;
-
+  color: #464545;
+  font-size: 2.5rem;
+  margin-left: 1rem;
+  margin-bottom: .3rem;
+  background-color:  #b6d4c6;
+  border: 0;
+  outline: 0;
+  cursor: pointer;
 }
 
 .nav-expanded {
   position: absolute;
   display: flex;
   flex-direction: column;
-  margin-top: 18rem;
-  padding-left: 4rem;
+  top: 4.2rem;
+  padding: 2rem 0 2rem 4rem;
   width: 100%;
-  background-color: #b6d4c6;
+  background-color: rgb(182, 212, 198);
   align-items: left;
+  border-bottom: 2px solid #407378;
+  box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.5);
 }
 
 .nav-expanded .menu-button {
@@ -160,5 +143,4 @@ export default {
     color: #464545;
   }
 }
-
 </style>
