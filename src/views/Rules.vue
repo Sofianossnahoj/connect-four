@@ -1,15 +1,17 @@
 <template>
   <main>
-    <Navigation /> 
+    <Navigation />
+
     <section class="rules-text">
       <h1>Regler</h1>
-      <p v-html="players"></p>
+      <p><b>Antal spelare:</b> Två</p>
       <p>Målet är att lägga fyra av sina brickor i rad på spelplanen. Raden kan vara antingen vågrätt, lodrätt eller diagonal.</p>
       <p>Spelet börjar med att deltagarna väljer färg på sina brickor. Därefter turas de om att spela en bricka i taget genom att klicka på den lodräta kolumn där de vill lägga den.</p>
       <p>Det gäller att vara strategisk. Samtidigt som deltagarna försöker lägga sin rad måste de hindra sin motståndare från att göra detsamma.</p>
       <p>Den som först lyckas få fyra i rad vinner.</p>
       <p>Om brädet fylls utan att någon fått fyra brickor i rad slutar spelet oavgjort.</p>
     </section>
+
     <section class="win-info">
       <h3 class="winning-positions">Så här vinner du:</h3>
       <article class="winning-boards">
@@ -19,6 +21,7 @@
         <img src="../assets/diagonal-135-win.jpg" alt="diagonal-135-win" class="diagonal-135-win">
       </article>
     </section>
+    
   </main>
 </template>
 
@@ -28,24 +31,18 @@ import Navigation from '../components/Navigation.vue'
 export default {
   components: {
     Navigation
-  },
-  computed: {
-    players() {
-      return `<b>Antal spelare:</b> Två`
-    }
   }
 }
 </script>
 
 <style scoped>
-/* Har problem med att innehållet spiller över bodyn och skulle behöva hjälp att fixa det */
-
 main {
   width: 100vw;
   height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
+  color: #464545;
 }
 
 .rules-text {
@@ -65,9 +62,7 @@ main {
   grid-template-columns: 1fr 1fr;
   grid-auto-rows: auto;
   gap: 30px;
-  /* grid-template-areas: "winning-positions winning-positions"
-  "horizontal-win vertical-win"
-  "diagonal-45-win diagonal-135-win"; */
+  margin-bottom: 5%;
 }
 
 img {
@@ -77,15 +72,12 @@ img {
 h1 {
   font-family: 'Rajdhani', sans-serif;
   font-size: 70px;
-  /* line-height: 89.32px; */
-  /* padding-bottom: 0; */
   margin-bottom: 0;
 }
 
 h3 {
   font-family: 'Rajdhani', sans-serif;
   font-size: 36px;
-  /* padding-bottom: 0; */
   margin-bottom: 10px;
 }
 
