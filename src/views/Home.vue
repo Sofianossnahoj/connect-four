@@ -2,8 +2,8 @@
 
   <main>
     <desktopNavigation v-if="!desktopView"/>
-    <article class="homeLanding">
-      <section class="homeLogo">
+    <article class="home__landing">
+      <section class="home__logo">
         <h3>Välkommen till </h3>
         <h1>fyra i rad</h1> 
     </section>
@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import desktopNavigation from "../components/Navigation.vue"; 
+import DesktopNavigation from "../components/Navigation.vue"; 
 export default {
   
 
@@ -27,7 +27,7 @@ export default {
    }
    },
    components: {
-    desktopNavigation
+    DesktopNavigation
   },
 
   methods: {
@@ -46,18 +46,19 @@ export default {
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Ribeye&family=Open+Sans&family=Rajdhani:wght@300&display=swap');
 
-.homeLanding {
+.home__landing {
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  overflow: scroll;
 }
 
-.homeLogo{
+.home__logo{
   background: url("../assets/LogoMarkers.svg") bottom no-repeat ;
-  height: 30%;
+  height: 25%;
   width: 100%;
   margin-bottom: 20px;
   margin-left: 10px;
@@ -82,7 +83,8 @@ h1{
   text-align: center;
   text-transform: uppercase;
   font-size: 36px;
-  margin-top: -35px;
+  margin-top: -40px;
+  padding-bottom: 20px;
 
 }
 .start__btn{
@@ -108,7 +110,7 @@ text-decoration: none;
 }
 @media screen and (min-width: 620px){
   
- .homeLogo {
+ .home__logo {
    background-size: 545px 107px;
    height: 50%;
  }
