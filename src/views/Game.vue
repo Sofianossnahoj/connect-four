@@ -198,6 +198,12 @@ div.game div.player-one {
   background-color: #EE9292;
 }
 
+div.game div.win {
+  background-image: url('../assets/star.png');
+  background-position: center;
+  background-size: cover;
+}
+
 div.game div.player-two {
   background-color: #DECF98;
 }

@@ -1,5 +1,5 @@
 import board from './board.js';
-import getDiagonals from './diagonals.js'
+import { getDiagonals, getDiagonalStyle } from './diagonals.js'
 
 let currentPlayer;
 
@@ -39,8 +39,10 @@ export function checkForWin() {
   for (let col = 0; col < 6; col ++) {
     const horizontal = board[col].join('');
   if (horizontal.includes(oneWin)) {
+    styleHorizontalWin(col);
     return 1;
   } else if (horizontal.includes(twoWin)) {
+    styleHorizontalWin(col);
     return 2;
   }
   }
@@ -56,8 +58,10 @@ export function checkForWin() {
   for (let row = 0; row < 7; row ++) {
     const vertical = matrix[row].join('');
   if (vertical.includes(oneWin)) {
+    styleVerticalWin(row);
     return 1;
   } else if (vertical.includes(twoWin)) {
+    styleVerticalWin(row);
     return 2;
   }
   }
@@ -68,11 +72,40 @@ export function checkForWin() {
   for (let i = 0; i < diagonals.length; i ++) {
     const diagonal = diagonals[i];
     if (diagonal.includes(oneWin)) {
+      styleDiagonalWin(i);
       return 1;
     } else if (diagonal.includes(twoWin)) {
+      styleDiagonalWin(i);
       return 2;
     }
   }
 
   return 0;
+}
+
+function styleHorizontalWin(col) {
+  setTimeout(() => {
+    for (let i = 0; i < 7; i ++) {
+      const circle = document.querySelector(`[data-col="${col}"][data-row="${i}"]`);
+      circle.classList.add('win');
+    }
+  }, 500);
+}
+
+function styleVerticalWin(row) {
+  setTimeout(() => {
+    for (let i = 0; i < 6; i ++) {
+      const circle = document.querySelector(`[data-col="${i}"][data-row="${row}"]`);
+      circle.classList.add('win');
+    }
+  }, 500);
+}
+
+function styleDiagonalWin(solution) {
+  setTimeout(() => {
+    const circles = getDiagonalStyle();
+    for (let i = 0; i < circles[solution].length; i ++) {
+      circles[solution][i].classList.add('win');
+    }
+  }, 500);
 }
