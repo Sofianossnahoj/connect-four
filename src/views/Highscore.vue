@@ -3,10 +3,16 @@
     <Navigation />
     <div class="highscore">
       <h1 class="highscore-title">TOPP 10</h1>
+      <button @click="toggleHighscore">{{ toggleText }}</button>
       <ul class="top-list">
+        <li v-if="highscore.length === 0">
+          De tio bästa spelen kommer visas här!
+        </li>
         <li v-for="(score, index) in highscore" :key="index">
-          {{ index + 1 }}.
-          {{ score.name }}
+          <div>
+            {{ index + 1 }}.
+            {{ score.name }}
+          </div>
           {{ score.moves }}
         </li>
       </ul>
@@ -29,8 +35,26 @@ export default {
       ai: false
     }
   },
+  methods: {
+    toggleHighscore() {
+      this.ai = !this.ai;
+      this.getHighscores(); 
+    },
+    getHighscores() {
+      this.highscore = getHighscore(this.ai);
+    }
+  },
   mounted() {
-    this.highscore = getHighscore(this.ai);
+    this.getHighscores(); 
+  },
+  computed: {
+    toggleText() {
+      if (this.ai) {
+        return 'Visa spel mot en vän';
+      } else {
+        return 'Visa spel mot datorn';
+      }
+    }
   }
 }
 </script>
@@ -42,6 +66,20 @@ main {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+button {
+  display: flex;
+  height: 50px;
+  background-color: #407378;
+  border-radius: 4px;
+  color: #b6d4c6;
+  font-family: "Rajdhani", sans-serif;
+  font-size: 25px;
+  justify-content: center;
+  align-items: center;
+  border-style: none;
+  cursor: pointer;
 }
 
 .highscore {
@@ -60,12 +98,19 @@ main {
 ul.top-list {
   font-family: 'Rajdhani', sans-serif;
   font-size: 2rem;
+  font-weight: bold;
   width: 800px;
   margin: 0;
   margin-top: 1rem;
   color: #464545;
   list-style: none;
   padding: 0;
+}
+
+li {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 1rem;
 }
 
 li:nth-child(odd) {
@@ -83,7 +128,8 @@ li:nth-child(odd) {
     padding: 0 1rem;
   }
 
-  .highscore-title {
+  .highscore-title,
+  button {
     margin-left: 1rem;
   }
 }
