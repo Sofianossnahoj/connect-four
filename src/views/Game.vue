@@ -68,6 +68,7 @@ import Navigation from '../components/Navigation.vue'
 
 import { playPiece, checkForWin } from '../game/mechanics.js'
 import { playAIPiece } from '../game/ai.js'
+import { saveWinner } from '../game/highscore.js'
 
 export default {
   components: {
@@ -76,9 +77,9 @@ export default {
   data() {
     return {
       playable: true,
-      versusAI: true,
+      versusAI: false,
       playerOne: 'Jack',
-      playerTwo: 'AI',
+      playerTwo: 'Robin',
       currentPlayer: 1,
       winner: 0,
       countPlayerOne: 0,
@@ -149,6 +150,10 @@ export default {
     winner() {
       if (this.winner !== 0) {
         this.playable = false;
+          if (this.versusAI && this.winner === 2) return // If playing against AI and AI won, do nothing
+            const winner = this.winner === 1 ? this.playerOne : this.playerTwo;
+            const numberOfMoves = this.winner === 1 ? this.countPlayerOne : this.countPlayerTwo;
+            saveWinner(winner, numberOfMoves, this.versusAI);
       }
     }
   }
@@ -212,6 +217,7 @@ span.current {
   font-family: 'Ribeye', cursive;
   font-size: 2rem;
   margin-top: 2rem;
+  color: #464545;
 }
 
 section.info {
