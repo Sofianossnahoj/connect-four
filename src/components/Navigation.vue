@@ -11,14 +11,14 @@
     </div>
 
     <div class="nav-menu">  
-      <button class="menu-button" @click="goToPage('/')">HEM</button>
+      <button class="menu-button" @click="goToPage('/')">START</button>
       <button class="menu-button" @click="goToPage('/rules')">REGLER</button>
       <button class="menu-button" @click="goToPage('/history')">HISTORIA</button>
       <button class="menu-button" @click="goToPage('/highscore')">TOPP 10</button>
     </div>
 
     <div class="nav-expanded" v-if="navOpen">
-      <button class="menu-button" @click="goToPage('/')">HEM</button>
+      <button class="menu-button" @click="goToPage('/')">START</button>
       <button class="menu-button" @click="goToPage('/rules')">REGLER</button>
       <button class="menu-button" @click="goToPage('/history')">HISTORIA</button>
       <button class="menu-button" @click="goToPage('/highscore')">TOPP 10</button>
