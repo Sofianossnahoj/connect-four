@@ -74,12 +74,14 @@ export default {
   components: {
     Navigation
   },
+  props: {
+    versusAI: Boolean,
+    playerOne: String,
+    playerTwo: String
+  },
   data() {
     return {
       playable: true,
-      versusAI: false,
-      playerOne: 'Jack',
-      playerTwo: 'Robin',
       currentPlayer: 1,
       winner: 0,
       countPlayerOne: 0,
