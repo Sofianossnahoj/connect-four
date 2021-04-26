@@ -39,7 +39,7 @@
             required
           />
         </form>
-          <submit class="btn-playingAlternatives" v-on:click="submitPlayer1()">Spelare 1 ok!</submit>
+          <button class="btn-playingAlternatives" v-on:click="submitPlayer1()">Spelare 1 ok!</button>
       </article>
 
       <!-- settings for player 2-->
@@ -55,7 +55,7 @@
             required
           />
         </form>
-          <submit class="btn-playingAlternatives" v-on:click="submitPlayer2()">Spelare 2 ok!</submit>
+          <button class="btn-playingAlternatives" v-on:click="submitPlayer2()">Spelare 2 ok!</button>
       </article>
 
       <!-- when player against bot-->
@@ -71,7 +71,7 @@
             required
           />
         </form>
-        <form>
+        <!--<form>
           <label>Välj färg:</label>
           <div class="checkmark-container">
             <label id="playerColor-red" class="choose-markercolor">
@@ -103,9 +103,9 @@
           >
             <option class="dropdown-options">Lätt</option>
             <option class="dropdown-options">Svår</option>
-          </select>
-        </form>
-        <submit class="btn-playingAlternatives" v-on:click=" submitPlayerVsBot()">Spelare ok</submit>
+          </select> 
+        </form> -->
+        <button class="btn-playingAlternatives" v-on:click=" submitPlayerVsBot()">Spelare ok</button>
       </article>
     </section>
   </main>
@@ -136,7 +136,7 @@ export default {
       this.playingAlternatives = false;
     },
     submitPlayerVsBot(){
-      const payload = {playAgainstBot: this.playAgainstBot, playerOne: this.playerOne, playerTwo: this.playerTwo}
+      const payload = {playAgainstBot: this.playAgainstBot, playerOne: this.playerOne, playerTwo: "Botson"}
       this.$emit("settings", payload)
       this.$router.push("/game")
     },
@@ -254,7 +254,6 @@ label {
   border-radius: 7px;
   border-style: none;
   font-family: "Rajdhani", sans-serif;
-  text-transform: uppercase;
   font-size: 36px;
   color: #424040;
   font-weight: 600;
