@@ -35,7 +35,7 @@
             type="text"
             class="input-name"
             name="playerName"
-            v-model="enterName"
+            v-model="playerOne"
             required
           />
         </form>
@@ -51,7 +51,7 @@
             type="text"
             class="input-name"
             name="playerName"
-            v-model="enterName"
+            v-model="playerTwo"
             required
           />
         </form>
@@ -116,6 +116,8 @@ import NavigationMenu from "../components/Navigation";
 export default {
   data() {
     return {
+      playerOne: "",
+      playerTwo: "",
       playAgainstBot: false,
       settingsplayer1: false,
       settingsplayer2: false,
@@ -145,6 +147,8 @@ export default {
     },
     submitPlayer2() {
       this.settingsplayer2 = false;
+      const payload = {playerOne: this.playerOne, playerTwo: this.playerTwo, playAgainstBot: this.playAgainstBot}
+      this.$emit("settings", payload)
       // Denna här metoden ska putta inställningar till databasen för att sedan kunna starta spelet
     }
   },
@@ -179,6 +183,12 @@ h2 {
   font-family: "Rajdhani", sans-serif;
   font-size: 36px;
   color: #424040;
+}
+h3 {
+  font-family: "Rajdhani", sans-serif;
+  font-size: 36px;
+  color: #424040;
+  margin-bottom: -10px;
 }
 
 .game-info {
