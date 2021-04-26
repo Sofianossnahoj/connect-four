@@ -1,10 +1,3 @@
-
-// - Gör till lista
-// - Fixa länkar
-// - Lägg till prickar
-// - Bild?
-
-
 <template>
   <main>
     <Navigation />
@@ -24,8 +17,7 @@
         </ul>
       </p>
 
-      <p><b>Källor:</b> <a href="https://www.gamesver.com/a-brief-history-of-connect-4-four-in-a-row/">Gamesver</a> <a href="https://www.youtube.com/watch?v=yDWPi1pZ0Po">Numberphile</a> <a href="http://oeis.org/A212693">The OEIS Foundation</a> <a href="https://www.tradgames.org.uk/games/Four-in-a-row.htm">Tradgames</a>
-      <a href="https://en.wikipedia.org/wiki/Connect_Four">Wikipedia</a>
+      <p><b>Källor:</b> <a href="https://www.gamesver.com/a-brief-history-of-connect-4-four-in-a-row/">Gamesver</a> <a href="https://www.youtube.com/watch?v=yDWPi1pZ0Po">Numberphile</a> <a href="http://oeis.org/A212693">The OEIS Foundation</a> <a href="https://www.tradgames.org.uk/games/Four-in-a-row.htm">Tradgames</a> <a href="https://en.wikipedia.org/wiki/Connect_Four">Wikipedia</a>
       </p>
     </section>
   </main>
