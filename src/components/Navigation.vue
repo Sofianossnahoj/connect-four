@@ -138,9 +138,14 @@ export default {
   }
   .hamburger-nav {
     display: block;
+    margin-left: 0;
   }
   .corner-title {
     color: #464545;
+    font-size: 1.5rem;
+  }
+  .nav-expanded .menu-button {
+    font-size: 1rem;
   }
 }
 </style>
