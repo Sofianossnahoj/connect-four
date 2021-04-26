@@ -1,8 +1,34 @@
 <template>
   <div id="app">
-    <router-view/>
+    <router-view  @settings="saveSettings"
+                  :playerOne="playerOne"
+                  :playerTwo="playerTwo"
+                  :versusAI="playAgainstBot"
+    />
   </div>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      playerOne: "",
+      playerTwo: "",
+      playAgainstBot: false, 
+    }
+  },
+  methods: {
+    saveSettings(payload) {
+      this.playerOne = payload.playerOne
+      this.playerTwo = payload.playerTwo
+      this.playAgainstBot = payload.playAgainstBot
+    }
+  }
+}
+
+
+</script>
+
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Ribeye&family=Open+Sans&family=Rajdhani:wght@300&display=swap');

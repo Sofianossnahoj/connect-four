@@ -67,7 +67,7 @@
             type="text"
             class="input-name"
             name="playerName"
-            v-model="enterName"
+            v-model="playerOne"
             required
           />
         </form>
@@ -134,22 +134,21 @@ export default {
     showBot() {
       this.playAgainstBot = true;
       this.playingAlternatives = false;
-      // metod för att starta spelet
     },
     submitPlayerVsBot(){
-      this.playAgainstBot = false;
-      //metod för att spara inställningarna
+      const payload = {playAgainstBot: this.playAgainstBot, playerOne: this.playerOne, playerTwo: this.playerTwo}
+      this.$emit("settings", payload)
+      this.$router.push("/game")
     },
     submitPlayer1() {
       this.settingsplayer1 = false;
       this.settingsplayer2 = true;
-      // Denna här metoden ska putta inställningar till databasen
     },
     submitPlayer2() {
       this.settingsplayer2 = false;
       const payload = {playerOne: this.playerOne, playerTwo: this.playerTwo, playAgainstBot: this.playAgainstBot}
       this.$emit("settings", payload)
-      // Denna här metoden ska putta inställningar till databasen för att sedan kunna starta spelet
+      this.$router.push("/game")
     }
   },
 };
