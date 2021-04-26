@@ -66,8 +66,8 @@ export default {
 
 <style scoped>
 .menu-button {
-  width: 98px;
-  height: 40px;
+  width: 6rem;
+  height: 2.5rem;
   background-color: #b6d4c6;
   border-radius: 8px;
   place-items: center;
