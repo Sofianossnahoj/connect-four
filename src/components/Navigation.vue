@@ -149,6 +149,7 @@ export default {
     width: 8rem;
     height: 0;
     padding: 1rem;
+    z-index: 150;
   }
 }
 </style>
