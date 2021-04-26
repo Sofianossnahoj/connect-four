@@ -94,7 +94,6 @@ p {
 
   h1 {
     font-size: 36px;
-
   }
 
   h3 {
