@@ -107,6 +107,7 @@ export default {
   align-items: left;
   border-bottom: 2px solid #407378;
   box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.5);
+  z-index: 1000;
 }
 
 .nav-expanded .menu-button {
