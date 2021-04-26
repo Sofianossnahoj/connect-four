@@ -72,6 +72,7 @@ import Navigation from '../components/Navigation.vue'
 import { playPiece, checkForWin } from '../game/mechanics.js'
 import { playAIPiece } from '../game/ai.js'
 import { saveWinner } from '../game/highscore.js'
+import { resetBoard } from '../game/board.js'
 
 export default {
   components: {
@@ -164,6 +165,9 @@ export default {
             saveWinner(winner, numberOfMoves, this.versusAI);
       }
     }
+  },
+  created() {
+    resetBoard();
   }
 }
 </script>

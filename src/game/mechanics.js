@@ -1,4 +1,4 @@
-import board from './board.js';
+import { board } from './board.js';
 import { getDiagonals, getDiagonalStyle } from './diagonals.js'
 
 let currentPlayer;
