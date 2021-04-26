@@ -90,6 +90,7 @@ p {
     width: 100%;
     height: 100%;
     grid-template-columns: 1fr;
+    gap: 20px;
   }
 
   h1 {
