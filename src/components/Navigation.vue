@@ -146,6 +146,10 @@ export default {
   }
   .nav-expanded .menu-button {
     font-size: 1rem;
+    width: 8rem;
+    height: 0;
+    padding: 1rem;
+    z-index: 150;
   }
 }
 </style>
