@@ -3,9 +3,7 @@
     <navigationMenu />
     <section class="game-info">
       <p>
-        I det klassiska spelet Fyra i rad spelar du för att vinna samtidigt som
-        du måste se upp för motståndarens drag! Välj att spela mot familj/
-        kompisar eller mot en bot. Först till fyra i rad vinner!
+        I det klassiska spelet <i>Fyra i rad</i> spelar du för att vinna samtidigt som du måste se upp för motståndarens drag. Välj att spela mot familj och vänner eller mot en bot. Först till fyra i rad vinner!
       </p>
       <!--User chooses to play against bot or another player-->
       <section v-show="playingAlternatives">

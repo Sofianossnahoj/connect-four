@@ -91,6 +91,7 @@ h1 {
   justify-content: center;
   align-items: center;
   text-decoration: none;
+  text-transform: uppercase;
 }
 
 @media screen and (min-width: 500px) {
