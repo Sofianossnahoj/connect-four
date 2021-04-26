@@ -60,6 +60,9 @@
         <p>Antal drag: {{ countPlayerTwo }}</p>
       </div>
     </section>
+    <section>
+      <button v-on:click="resetGame()" class="new-game">Nytt spel</button>
+    </section>
   </main>
 </template>
 
@@ -146,6 +149,9 @@ export default {
           this.playable = true;
         }, 1000);
       }
+    },
+    resetGame() {
+      this.$router.push("/landing")
     }
   },
   watch: {
@@ -261,6 +267,22 @@ section.info span.piece {
 
 section.info div:nth-child(2) span {
   color: #DECF98;
+}
+
+.new-game {
+  display: flex;
+  height: 50px;
+  width: 234px;
+  background-color: #424040;
+  border-radius: 4px;
+  color: #b6d4c6;
+  font-family: "Rajdhani", sans-serif;
+  font-size: 36px;
+  justify-content: center;
+  align-items: center;
+  border-style: none;
+  margin-bottom: 2rem;
+  margin-top: 1rem;
 }
 
 @media screen and (max-width: 500px) {
