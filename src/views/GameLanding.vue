@@ -27,9 +27,7 @@
             Välj
           </button>
         </article>
-        <!--<article class="container-logo">
-          <div id="logo-markers"></div>
-        </article>-->
+        <img class="logo-markers" src="../assets/LogoMarkers.svg" alt="Markers">
       </section>
 
       <!-- settings for player 1-->
@@ -246,10 +244,10 @@ h3 {
   height: 200px;
   width: 200px;
 }
-#logo-markers {
-  background: url("../assets/LogoMarkers.svg") center no-repeat;
-  background-size: 100%;
-  height: 60px;
+.logo-markers {
+  height: 100%;
+  width:100%; 
+  margin-top: 1.5rem;
 }
 
 p {
