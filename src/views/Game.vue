@@ -139,13 +139,14 @@ export default {
     playSpectateAI() {
       if (!this.playable) return;
       if (this.winner === 0) {
+        const randomTime = Math.floor((Math.random() * 1000) + 1000);
         setTimeout( () => {
           playAIPiece(this.currentPlayer);
           this.winner = checkForWin(this.countPlayerOne);
           this.increaseCount();
           this.currentPlayer = (this.currentPlayer === 1 ? 2 : 1);
           this.playSpectateAI();
-        }, 1000);
+        }, randomTime);
       }
     },
     displayName(name) {
