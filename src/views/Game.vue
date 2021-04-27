@@ -85,6 +85,7 @@ export default {
   },
   data() {
     return {
+      spectateAI: false,
       playable: true,
       currentPlayer: 1,
       winner: 0,
@@ -112,7 +113,7 @@ export default {
   methods: {
     getRow(e) {
       const row = e.target.getAttribute('data-row');
-      if (this.playable && row !== null) {
+      if (this.playable && row !== null && !this.spectateAI) {
         const played = playPiece(row, this.currentPlayer);
         if (played) {
           this.winner = checkForWin();
@@ -143,13 +144,23 @@ export default {
       this.playable = false;
       if (this.winner === 0) {
         setTimeout(() => {
-          playAIPiece();
+          playAIPiece(2);
           this.winner = checkForWin();
           this.increaseCount();
           this.currentPlayer = 1;
           this.playable = true;
         }, 1000);
       }
+    },
+    playSpectateAI() {
+      if (!this.playable) return;
+      setTimeout( () => {
+        playAIPiece(this.currentPlayer);
+        this.winner = checkForWin();
+        this.increaseCount();
+        this.currentPlayer = (this.currentPlayer === 1 ? 2 : 1);
+        this.playSpectateAI();
+      }, 1000);
     },
     resetGame() {
       this.$router.push("/landing")
@@ -159,7 +170,8 @@ export default {
     winner() {
       if (this.winner !== 0) {
         this.playable = false;
-          if (this.versusAI && this.winner === 2) return // If playing against AI and AI won, do nothing
+          if (this.versusAI && this.winner === 2) return; // If playing against AI and AI won, do nothing
+            if (this.spectateAI) return; // If spectating AI do nothing
             const winner = this.winner === 1 ? this.playerOne : this.playerTwo;
             const numberOfMoves = this.winner === 1 ? this.countPlayerOne : this.countPlayerTwo;
             saveWinner(winner, numberOfMoves, this.versusAI);
@@ -168,6 +180,9 @@ export default {
   },
   created() {
     resetBoard();
+  },
+  mounted() {
+    this.playSpectateAI()
   }
 }
 </script>
