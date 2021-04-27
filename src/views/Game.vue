@@ -90,26 +90,8 @@ export default {
       currentPlayer: 1,
       winner: 0,
       countPlayerOne: 0,
-      countPlayerTwo: 0
-    }
-  },
-  computed: {
-    currentPlayerText() {
-      if (this.winner === 0) {
-        if (this.currentPlayer === 1) {
-          return this.displayName(this.playerOne);
-        } else {
-          return this.displayName(this.playerTwo);
-        }
-      } else {
-        if (this.winner === 1) {
-          return this.playerOne + ' vann!';
-        } else if (this.winner === 2) {
-          return this.playerTwo + ' vann!';
-        } else {
-          return 'Oavgjort!';
-        }
-      }
+      countPlayerTwo: 0,
+      currentPlayerText: ''
     }
   },
   methods: {
@@ -178,12 +160,31 @@ export default {
       if (this.winner !== 0) {
         this.playable = false;
           if (this.versusAI && this.winner === 2) return; // If playing against AI and AI won, do nothing
-            if (this.spectateAI) return; // If spectating AI do nothing
-            if (winner === 3) return; // If draw do nothing
+          if (this.spectateAI) return; // If spectating AI do nothing
+          if (winner === 3) return; // If draw do nothing
             const winner = this.winner === 1 ? this.playerOne : this.playerTwo;
             const numberOfMoves = this.winner === 1 ? this.countPlayerOne : this.countPlayerTwo;
             saveWinner(winner, numberOfMoves, this.versusAI);
       }
+    },
+    currentPlayer() {
+      setTimeout(() => {
+      if (this.winner === 0) {
+        if (this.currentPlayer === 1) {
+          this.currentPlayerText = this.displayName(this.playerOne);
+        } else {
+          this.currentPlayerText = this.displayName(this.playerTwo);
+        }
+      } else {
+        if (this.winner === 1) {
+          this.currentPlayerText = this.playerOne + ' vann!';
+        } else if (this.winner === 2) {
+          this.currentPlayerText =  this.playerTwo + ' vann!';
+        } else {
+          this.currentPlayerText = 'Oavgjort!';
+        }
+      }
+      }, 500);
     }
   },
   created() {
@@ -193,6 +194,7 @@ export default {
     }
   },
   mounted() {
+    this.currentPlayerText = this.displayName(this.playerOne);
     if (this.spectateAI) {
       this.playSpectateAI();
     }
