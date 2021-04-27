@@ -4,6 +4,7 @@
                   :playerOne="playerOne"
                   :playerTwo="playerTwo"
                   :versusAI="playAgainstBot"
+                  :spectateAI="spectateAI"
     />
   </div>
 </template>
@@ -15,13 +16,15 @@ export default {
       playerOne: "",
       playerTwo: "",
       playAgainstBot: false, 
+      spectateAI: false
     }
   },
   methods: {
     saveSettings(payload) {
       this.playerOne = payload.playerOne
       this.playerTwo = payload.playerTwo
-      this.playAgainstBot = payload.playAgainstBot
+      this.playAgainstBot = payload.playAgainstBot || false
+      this.spectateAI = payload.spectateAI || false
     }
   }
 }

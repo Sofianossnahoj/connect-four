@@ -21,7 +21,7 @@
         </article>
         <article>
           <h2>Spel mellan två bottar</h2>
-          <button class="btn-playingAlternatives">
+          <button class="btn-playingAlternatives" v-on:click="runBotGame()">
             Välj
           </button>
         </article>
@@ -153,9 +153,8 @@ export default {
     },
     submitPlayer1() {
       this.settingsplayer1 = true;
-      const payload = {playerOne: this.playerOne, playAgainstBot: this.playAgainstBot}
+      
       if (this.validatePlayerOne()) {
-          this.$emit("settings", payload)
           this.settingsplayer1 = false;
           this.settingsplayer2 = true;
       }
@@ -170,8 +169,7 @@ export default {
     },
     submitPlayer2() {
       this.settingsplayer2 = true;
-      const payload = { playerTwo: this.playerTwo}
-      this.$emit("settings", payload)
+      const payload = {playerOne: this.playerOne, playerTwo: this.playerTwo, playAgainstBot: this.playAgainstBot}
       if (this.validatePlayerTwo()) {
           this.$emit("settings", payload)
           this.$router.push("/game")
@@ -186,6 +184,11 @@ export default {
         alert ('fyll i ett namn för att spela!')
       }
     },
+    runBotGame() {
+      const payload = {playerOne: "mr Bot", playerTwo: "mrs Bot", spectateAI: true}
+      this.$emit("settings", payload)
+      this.$router.push("/game")
+    }
   }
 };
 </script>
@@ -207,7 +210,7 @@ main {
 .btn-playingAlternatives {
   display: flex;
   height: 50px;
-  width: 234px;
+  min-width: 234px;
   background-color: #424040;
   border-radius: 4px;
   color: #b6d4c6;
