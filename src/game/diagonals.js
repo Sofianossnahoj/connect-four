@@ -1,4 +1,4 @@
-import board from './board.js'
+import { board } from './board.js'
 
 export function getDiagonals() {
   const diagonals = [];

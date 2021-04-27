@@ -60,6 +60,9 @@
         <p>Antal drag: {{ countPlayerTwo }}</p>
       </div>
     </section>
+    <section>
+      <button v-on:click="resetGame()" class="new-game">Nytt spel</button>
+    </section>
   </main>
 </template>
 
@@ -69,47 +72,35 @@ import Navigation from '../components/Navigation.vue'
 import { playPiece, checkForWin } from '../game/mechanics.js'
 import { playAIPiece } from '../game/ai.js'
 import { saveWinner } from '../game/highscore.js'
+import { resetBoard } from '../game/board.js'
 
 export default {
   components: {
     Navigation
   },
+  props: {
+    spectateAI: Boolean,
+    versusAI: Boolean,
+    playerOne: String,
+    playerTwo: String
+  },
   data() {
     return {
       playable: true,
-      versusAI: false,
-      playerOne: 'Jack',
-      playerTwo: 'Robin',
       currentPlayer: 1,
       winner: 0,
       countPlayerOne: 0,
-      countPlayerTwo: 0
-    }
-  },
-  computed: {
-    currentPlayerText() {
-      if (this.winner === 0) {
-        if (this.currentPlayer === 1) {
-          return this.playerOne + 's tur';
-        } else {
-          return this.playerTwo + 's tur';
-        }
-      } else {
-        if (this.winner === 1) {
-          return this.playerOne + ' vann!';
-        } else {
-          return this.playerTwo + ' vann!';
-        }
-      }
+      countPlayerTwo: 0,
+      currentPlayerText: ''
     }
   },
   methods: {
     getRow(e) {
       const row = e.target.getAttribute('data-row');
-      if (this.playable && row !== null) {
+      if (this.playable && row !== null && !this.spectateAI) {
         const played = playPiece(row, this.currentPlayer);
         if (played) {
-          this.winner = checkForWin();
+          this.winner = checkForWin(this.countPlayerOne);
           this.increaseCount();
           this.switchPlayer();
         }
@@ -137,24 +128,75 @@ export default {
       this.playable = false;
       if (this.winner === 0) {
         setTimeout(() => {
-          playAIPiece();
-          this.winner = checkForWin();
+          playAIPiece(2);
+          this.winner = checkForWin(this.countPlayerOne);
           this.increaseCount();
           this.currentPlayer = 1;
           this.playable = true;
         }, 1000);
       }
+    },
+    playSpectateAI() {
+      if (!this.playable) return;
+      if (this.winner === 0) {
+        setTimeout( () => {
+          playAIPiece(this.currentPlayer);
+          this.winner = checkForWin(this.countPlayerOne);
+          this.increaseCount();
+          this.currentPlayer = (this.currentPlayer === 1 ? 2 : 1);
+          this.playSpectateAI();
+        }, 1000);
+      }
+    },
+    displayName(name) {
+      return (name.charAt(name.length - 1) === 's') ? name + ' tur' : name + 's tur';
+    },
+    resetGame() {
+      this.$router.push("/landing");
     }
   },
   watch: {
     winner() {
       if (this.winner !== 0) {
         this.playable = false;
-          if (this.versusAI && this.winner === 2) return // If playing against AI and AI won, do nothing
+          if (this.versusAI && this.winner === 2) return; // If playing against AI and AI won, do nothing
+          if (this.spectateAI) return; // If spectating AI do nothing
+          if (winner === 3) return; // If draw do nothing
             const winner = this.winner === 1 ? this.playerOne : this.playerTwo;
             const numberOfMoves = this.winner === 1 ? this.countPlayerOne : this.countPlayerTwo;
             saveWinner(winner, numberOfMoves, this.versusAI);
       }
+    },
+    currentPlayer() {
+      setTimeout(() => {
+      if (this.winner === 0) {
+        if (this.currentPlayer === 1) {
+          this.currentPlayerText = this.displayName(this.playerOne);
+        } else {
+          this.currentPlayerText = this.displayName(this.playerTwo);
+        }
+      } else {
+        if (this.winner === 1) {
+          this.currentPlayerText = this.playerOne + ' vann!';
+        } else if (this.winner === 2) {
+          this.currentPlayerText =  this.playerTwo + ' vann!';
+        } else {
+          this.currentPlayerText = 'Oavgjort!';
+        }
+      }
+      }, 500);
+    }
+  },
+  created() {
+    resetBoard();
+    if (this.playerOne === '') {
+      this.$router.push("/landing"); // Redirect to GameLanding if input fields are empty
+    }
+  },
+  mounted() {
+    this.currentPlayerText = this.displayName(this.playerOne);
+    if (this.spectateAI) {
+      this.playSpectateAI();
     }
   }
 }
@@ -259,6 +301,22 @@ section.info span.piece {
 
 section.info div:nth-child(2) span {
   color: #DECF98;
+}
+
+.new-game {
+  display: flex;
+  height: 50px;
+  width: 234px;
+  background-color: #424040;
+  border-radius: 4px;
+  color: #b6d4c6;
+  font-family: "Rajdhani", sans-serif;
+  font-size: 36px;
+  justify-content: center;
+  align-items: center;
+  border-style: none;
+  margin-bottom: 2rem;
+  margin-top: 1rem;
 }
 
 @media screen and (max-width: 500px) {

@@ -3,9 +3,9 @@
     <navigationMenu />
     <section class="game-info">
       <p>
-        I det klassiska spelet Fyra i rad spelar du för att vinna samtidigt som
-        du måste se upp för motståndarens drag! Välj att spela mot familj/
-        kompisar eller mot en bot. Först till fyra i rad vinner!
+        I det klassiska spelet <i>Fyra i rad</i> spelar du för att vinna
+        samtidigt som du måste se upp för motståndarens drag. Välj att spela mot
+        familj och vänner eller mot en bot. Först till fyra i rad vinner!
       </p>
       <!--User chooses to play against bot or another player-->
       <section v-show="playingAlternatives">
@@ -21,91 +21,75 @@
             Välj
           </button>
         </article>
-        <article class="container-logo">
-          <div id="logo-markers"></div>
+        <article>
+          <h2>Spel mellan två bottar</h2>
+          <button class="btn-playingAlternatives" v-on:click="runBotGame()">
+            Välj
+          </button>
         </article>
+        <!--<article class="container-logo">
+          <div id="logo-markers"></div>
+        </article>-->
       </section>
 
       <!-- settings for player 1-->
       <article v-show="settingsplayer1">
         <h3>Spelare 1</h3>
-        <form>
+        <div class="form">
           <label>Namn:</label>
           <input
+            @keypress.enter="submitPlayer1()"
             type="text"
             class="input-name"
             name="playerName"
-            v-model="enterName"
+            v-model="playerOne"
             required
           />
-        </form>
-          <submit class="btn-playingAlternatives" v-on:click="submitPlayer1()">Spelare 1 ok!</submit>
+        </div>
+        <button class="btn-playingAlternatives" v-on:click="submitPlayer1()">
+          Spelare 1 ok!
+        </button>
       </article>
 
       <!-- settings for player 2-->
       <article v-show="settingsplayer2">
         <h3>Spelare 2</h3>
-        <form>
+        <div class="form">
           <label>Namn:</label>
           <input
+            @keypress.enter="submitPlayer2()"
             type="text"
             class="input-name"
             name="playerName"
-            v-model="enterName"
+            v-model="playerTwo"
             required
           />
-        </form>
-          <submit class="btn-playingAlternatives" v-on:click="submitPlayer2()">Spelare 2 ok!</submit>
+        </div>
+        <button class="btn-playingAlternatives" v-on:click="submitPlayer2()">
+          Spelare 2 ok!
+        </button>
       </article>
 
       <!-- when player against bot-->
       <article v-show="playAgainstBot">
         <h2>Spela mot en bot</h2>
-        <form>
+        <div class="form">
           <label>Namn:</label>
           <input
+            @keypress.enter="submitPlayerVsBot()"
             type="text"
             class="input-name"
             name="playerName"
-            v-model="enterName"
+            v-model="playerOne"
             required
           />
-        </form>
-        <form>
-          <label>Välj färg:</label>
-          <div class="checkmark-container">
-            <label id="playerColor-red" class="choose-markercolor">
-              <input
-                type="radio"
-                value="playercolorRed"
-                name="playerColor"
-                v-model="playerColor"
-              />
-              <span class="checkmark checkmarkRed"></span>
-            </label>
-            <label id="playerColor-yellow" class="choose-markercolor">
-              <input
-                type="radio"
-                value="playercolorYellow"
-                name="playerColor"
-                v-model="playerColor"
-              />
-              <span class="checkmark checkmarkYellow"></span>
-            </label>
-          </div>
-        </form>
-        <form>
-          <label for="">Välj svårighetsgrad:</label>
-          <select
-            class="choose-difficulty"
-            v-model="chooseDifficulty"
-            name="AIDifficulty"
-          >
-            <option class="dropdown-options">Lätt</option>
-            <option class="dropdown-options">Svår</option>
-          </select>
-        </form>
-        <submit class="btn-playingAlternatives" v-on:click=" submitPlayerVsBot()">Spelare ok</submit>
+        </div>
+        <button
+          class="btn-playingAlternatives"
+          v-on:click="submitPlayerVsBot()"
+        >
+          Spelare ok
+        </button>
       </article>
     </section>
   </main>
@@ -116,6 +100,8 @@ import NavigationMenu from "../components/Navigation";
 export default {
   data() {
     return {
+      playerOne: "",
+      playerTwo: "",
       playAgainstBot: false,
       settingsplayer1: false,
       settingsplayer2: false,
@@ -132,26 +118,85 @@ export default {
     showBot() {
       this.playAgainstBot = true;
       this.playingAlternatives = false;
-      // metod för att starta spelet
     },
-    submitPlayerVsBot(){
-      this.playAgainstBot = false;
-      //metod för att spara inställningarna
+    submitPlayerVsBot() {
+      const payload = {
+        playAgainstBot: this.playAgainstBot,
+        playerOne: this.playerOne,
+        playerTwo: "Botson",
+      };
+      if (this.playerOne()){
+      this.$emit("settings", payload);
+      this.$router.push("/game");
+      }
+      if (!this.playerOne) {
+        alert("Fyll i ett namn för att spela!")
+      }
+    },
+
+    validatePlayerVsBot() {
+      if (this.playAgainstBot) {
+        return true;
+      }
+      if (!this.playAgainstBot) {
+        alert("Fyll i ett namn för att spela!");
+      }
     },
     submitPlayer1() {
-      this.settingsplayer1 = false;
-      this.settingsplayer2 = true;
-      // Denna här metoden ska putta inställningar till databasen
+      this.settingsplayer1 = true;
+
+      if (this.validatePlayerOne()) {
+        this.settingsplayer1 = false;
+        this.settingsplayer2 = true;
+      }
+    },
+    validatePlayerOne() {
+      if (this.playerOne) {
+        return true;
+      }
+      if (!this.playerOne) {
+        alert("Fyll i ett namn för att spela!");
+      }
     },
     submitPlayer2() {
-      this.settingsplayer2 = false;
-      // Denna här metoden ska putta inställningar till databasen för att sedan kunna starta spelet
-    }
+      this.settingsplayer2 = true;
+      const payload = {
+        playerOne: this.playerOne,
+        playerTwo: this.playerTwo,
+        playAgainstBot: this.playAgainstBot,
+      };
+      if (this.validatePlayerTwo()) {
+        this.$emit("settings", payload);
+        this.$router.push("/game");
+        this.settingsplayer2 = false;
+      }
+    },
+    validatePlayerTwo() {
+      if (this.playerTwo) {
+        return true;
+      }
+      if (!this.playerTwo) {
+        alert("Fyll i ett namn för att spela!");
+      }
+    },
+    runBotGame() {
+      const payload = {
+        playerOne: "Mr Bot",
+        playerTwo: "Mrs Bot",
+        spectateAI: true,
+      };
+      this.$emit("settings", payload);
+      this.$router.push("/game");
+    },
   },
 };
 </script>
 
 <style scoped>
+body {
+  overflow: scroll;
+  margin: none;
+}
 main {
   width: 100%;
   min-height: 100%;
@@ -159,12 +204,11 @@ main {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  overflow: scroll;
 }
 .btn-playingAlternatives {
   display: flex;
   height: 50px;
-  width: 234px;
+  min-width: 234px;
   background-color: #424040;
   border-radius: 4px;
   color: #b6d4c6;
@@ -173,12 +217,19 @@ main {
   justify-content: center;
   align-items: center;
   border-style: none;
-  margin-top: 20px;
+  margin-top: 10px;
+  cursor: pointer;
 }
 h2 {
   font-family: "Rajdhani", sans-serif;
   font-size: 36px;
   color: #424040;
+}
+h3 {
+  font-family: "Rajdhani", sans-serif;
+  font-size: 36px;
+  color: #424040;
+  margin-bottom: -20px;
 }
 
 .game-info {
@@ -192,6 +243,8 @@ h2 {
 }
 .container-logo {
   margin-top: 20px;
+  height: 200px;
+  width: 200px;
 }
 #logo-markers {
   background: url("../assets/LogoMarkers.svg") center no-repeat;
@@ -203,9 +256,10 @@ p {
   text-align: center;
   color: #464545;
   font-family: "Open Sans", sans-serif;
-  width: 90%;
+  width: 80%;
+  max-width: 800px;
 }
-form {
+.form {
   display: flex;
   justify-items: center;
   align-items: center;
@@ -218,21 +272,12 @@ form {
   border-radius: 7px;
   box-shadow: 0px 2px 2px rgb(70, 69, 69);
 }
-article{
+article {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-.checkmark-container {
-  display: flex;
-  width: 80%;
-  height: 54px;
-  flex-direction: row;
-  justify-content: space-around;
-  align-items: center;
-  background-color: white;
-  border-radius: 7px;
-}
+
 label {
   font-family: "Rajdhani", sans-serif;
   font-size: 36px;
@@ -245,58 +290,9 @@ label {
   border-radius: 7px;
   border-style: none;
   font-family: "Rajdhani", sans-serif;
-  text-transform: uppercase;
   font-size: 36px;
   color: #424040;
   font-weight: 600;
-}
-
-.choose-markercolor {
-  display: flex;
-  justify-content: space-between;
-  width: 41px;
-  height: 41px;
-  border: 5px solid #ee9292;
-  border-radius: 50%;
-}
-.choose-markercolor .checkmarkRed {
-  width: 100%;
-  height: 100%;
-  background-color: #ee9292;
-  border-radius: 50%;
-  display: none;
-}
-
-.choose-markercolor .checkmarkYellow {
-  width: 100%;
-  height: 100%;
-  background-color: #decf98;
-  border-radius: 50%;
-  display: none;
-}
-.choose-markercolor input {
-  display: none;
-}
-
-.choose-markercolor input:checked + .checkmark {
-  display: inline-block;
-}
-#playerColor-yellow {
-  border: 5px solid #decf98;
-}
-
-.choose-difficulty {
-  font-family: "Rajdhani", sans-serif;
-  color: #424040;
-  font-weight: 660;
-  font-size: 36px;
-  appearance: none;
-  background-image: url("../assets/DropdownArrow.svg");
-  background-repeat: no-repeat;
-  background-position: right;
-  width: 255px;
-  height: 54px;
-  border-style: none;
-  border-radius: 7px;
+  cursor: pointer;
 }
 </style>
