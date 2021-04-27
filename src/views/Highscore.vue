@@ -2,7 +2,10 @@
   <main>
     <Navigation />
     <div class="highscore">
-      <h1 class="highscore-title">TOPP 10</h1>
+      <section class="display-text">
+        <h1 class="highscore-title">TOPP 10</h1>
+        <p>{{ displayText }}</p>
+      </section>
       <button @click="toggleHighscore">{{ toggleText }}</button>
       <ul class="top-list">
         <li v-if="highscore.length === 0">
@@ -54,6 +57,13 @@ export default {
       } else {
         return 'Visa spel mot datorn';
       }
+    },
+    displayText() {
+      if (this.ai) {
+        return '- Mot datorn';
+      } else {
+        return '- Mot vänner';
+      }
     }
   }
 }
@@ -71,7 +81,7 @@ main {
 button {
   display: flex;
   height: 50px;
-  background-color: #407378;
+  background-color: #464545;
   border-radius: 4px;
   color: #b6d4c6;
   font-family: "Rajdhani", sans-serif;
@@ -92,7 +102,21 @@ button {
   font-family: 'Rajdhani', sans-serif;
   font-size: 70px;
   color: #464545;
-  margin-bottom: 0;
+  margin: 0;
+}
+
+section.display-text {
+  display: flex;
+  align-items: center;
+  margin-top: 58.1px;
+}
+
+p {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 20pt;
+  font-weight: bold;
+  color: #464545;
+  padding-left: 1rem;
 }
 
 ul.top-list {
