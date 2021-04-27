@@ -92,6 +92,7 @@ h1 {
   align-items: center;
   text-decoration: none;
   text-transform: uppercase;
+  cursor: pointer;
 }
 
 @media screen and (min-width: 500px) {

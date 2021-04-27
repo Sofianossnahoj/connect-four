@@ -19,56 +19,65 @@
             Välj
           </button>
         </article>
-        <article class="container-logo">
-          <div id="logo-markers"></div>
+        <article>
+          <h2>Spel mellan två bottar</h2>
+          <button class="btn-playingAlternatives">
+            Välj
+          </button>
         </article>
+        <!--<article class="container-logo">
+          <div id="logo-markers"></div>
+        </article>-->
       </section>
 
       <!-- settings for player 1-->
       <article v-show="settingsplayer1">
         <h3>Spelare 1</h3>
-        <form>
+        <div class="form">
           <label>Namn:</label>
           <input
+            @keypress.enter="submitPlayer1()"
             type="text"
             class="input-name"
             name="playerName"
             v-model="playerOne"
             required
           />
-        </form>
+        </div>
           <button class="btn-playingAlternatives" v-on:click="submitPlayer1()">Spelare 1 ok!</button>
       </article>
 
       <!-- settings for player 2-->
       <article v-show="settingsplayer2">
         <h3>Spelare 2</h3>
-        <form>
+        <div class="form">
           <label>Namn:</label>
           <input
+            @keypress.enter="submitPlayer2()"
             type="text"
             class="input-name"
             name="playerName"
             v-model="playerTwo"
             required
           />
-        </form>
+        </div>
           <button class="btn-playingAlternatives" v-on:click="submitPlayer2()">Spelare 2 ok!</button>
       </article>
 
       <!-- when player against bot-->
       <article v-show="playAgainstBot">
         <h2>Spela mot en bot</h2>
-        <form>
+        <div class="form">
           <label>Namn:</label>
           <input
+            @keypress.enter="submitPlayerVsBot()"
             type="text"
             class="input-name"
             name="playerName"
             v-model="playerOne"
             required
           />
-        </form>
+        </div>
         <!--<form>
           <label>Välj färg:</label>
           <div class="checkmark-container">
@@ -120,6 +129,10 @@ export default {
       settingsplayer1: false,
       settingsplayer2: false,
       playingAlternatives: true,
+
+      from: {
+        name:null, 
+      }
     };
   },
   components: { NavigationMenu },
@@ -139,20 +152,49 @@ export default {
       this.$router.push("/game")
     },
     submitPlayer1() {
-      this.settingsplayer1 = false;
-      this.settingsplayer2 = true;
+      this.settingsplayer1 = true;
+      const payload = {playerOne: this.playerOne, playAgainstBot: this.playAgainstBot}
+      if (this.validatePlayerOne()) {
+          this.$emit("settings", payload)
+          this.settingsplayer1 = false;
+          this.settingsplayer2 = true;
+      }
+    },
+    validatePlayerOne() {
+      if (this.playerOne) {
+        return true;
+      }
+      if (!this.playerOne) {
+        alert ('fyll i ett namn för att spela!')
+      }
     },
     submitPlayer2() {
-      this.settingsplayer2 = false;
-      const payload = {playerOne: this.playerOne, playerTwo: this.playerTwo, playAgainstBot: this.playAgainstBot}
+      this.settingsplayer2 = true;
+      const payload = { playerTwo: this.playerTwo}
       this.$emit("settings", payload)
-      this.$router.push("/game")
-    }
-  },
+      if (this.validatePlayerTwo()) {
+          this.$emit("settings", payload)
+          this.$router.push("/game")
+          this.settingsplayer2 = false;
+      }
+    },
+    validatePlayerTwo() {
+      if (this.playerTwo ) {
+        return true;
+      }
+      if (!this.playerTwo) {
+        alert ('fyll i ett namn för att spela!')
+      }
+    },
+  }
 };
 </script>
 
 <style scoped>
+body {
+  overflow: scroll;
+  margin: none;
+}
 main {
   width: 100%;
   min-height: 100%;
@@ -160,7 +202,7 @@ main {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  overflow: scroll;
+ 
 }
 .btn-playingAlternatives {
   display: flex;
@@ -175,6 +217,7 @@ main {
   align-items: center;
   border-style: none;
   margin-top: 20px;
+  cursor: pointer;
 }
 h2 {
   font-family: "Rajdhani", sans-serif;
@@ -199,6 +242,8 @@ h3 {
 }
 .container-logo {
   margin-top: 20px;
+  height: 200px;
+  width: 200px;
 }
 #logo-markers {
   background: url("../assets/LogoMarkers.svg") center no-repeat;
@@ -210,9 +255,12 @@ p {
   text-align: center;
   color: #464545;
   font-family: "Open Sans", sans-serif;
-  width: 90%;
+  width: 80%;
+  max-width: 800px;
+   margin-top: 67px;
+  
 }
-form {
+.form {
   display: flex;
   justify-items: center;
   align-items: center;
@@ -255,6 +303,7 @@ label {
   font-size: 36px;
   color: #424040;
   font-weight: 600;
+  cursor: pointer;
 }
 
 .choose-markercolor {
