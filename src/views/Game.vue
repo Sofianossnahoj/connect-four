@@ -79,13 +79,13 @@ export default {
     Navigation
   },
   props: {
+    spectateAI: Boolean,
     versusAI: Boolean,
     playerOne: String,
     playerTwo: String
   },
   data() {
     return {
-      spectateAI: false,
       playable: true,
       currentPlayer: 1,
       winner: 0,
@@ -97,15 +97,17 @@ export default {
     currentPlayerText() {
       if (this.winner === 0) {
         if (this.currentPlayer === 1) {
-          return this.playerOne + 's tur';
+          return this.displayName(this.playerOne);
         } else {
-          return this.playerTwo + 's tur';
+          return this.displayName(this.playerTwo);
         }
       } else {
         if (this.winner === 1) {
           return this.playerOne + ' vann!';
-        } else {
+        } else if (this.winner === 2) {
           return this.playerTwo + ' vann!';
+        } else {
+          return 'Oavgjort!';
         }
       }
     }
@@ -116,7 +118,7 @@ export default {
       if (this.playable && row !== null && !this.spectateAI) {
         const played = playPiece(row, this.currentPlayer);
         if (played) {
-          this.winner = checkForWin();
+          this.winner = checkForWin(this.countPlayerOne);
           this.increaseCount();
           this.switchPlayer();
         }
@@ -145,7 +147,7 @@ export default {
       if (this.winner === 0) {
         setTimeout(() => {
           playAIPiece(2);
-          this.winner = checkForWin();
+          this.winner = checkForWin(this.countPlayerOne);
           this.increaseCount();
           this.currentPlayer = 1;
           this.playable = true;
@@ -154,16 +156,21 @@ export default {
     },
     playSpectateAI() {
       if (!this.playable) return;
-      setTimeout( () => {
-        playAIPiece(this.currentPlayer);
-        this.winner = checkForWin();
-        this.increaseCount();
-        this.currentPlayer = (this.currentPlayer === 1 ? 2 : 1);
-        this.playSpectateAI();
-      }, 1000);
+      if (this.winner === 0) {
+        setTimeout( () => {
+          playAIPiece(this.currentPlayer);
+          this.winner = checkForWin(this.countPlayerOne);
+          this.increaseCount();
+          this.currentPlayer = (this.currentPlayer === 1 ? 2 : 1);
+          this.playSpectateAI();
+        }, 1000);
+      }
+    },
+    displayName(name) {
+      return (name.charAt(name.length - 1) === 's') ? name + ' tur' : name + 's tur';
     },
     resetGame() {
-      this.$router.push("/landing")
+      this.$router.push("/landing");
     }
   },
   watch: {
@@ -172,6 +179,7 @@ export default {
         this.playable = false;
           if (this.versusAI && this.winner === 2) return; // If playing against AI and AI won, do nothing
             if (this.spectateAI) return; // If spectating AI do nothing
+            if (winner === 3) return; // If draw do nothing
             const winner = this.winner === 1 ? this.playerOne : this.playerTwo;
             const numberOfMoves = this.winner === 1 ? this.countPlayerOne : this.countPlayerTwo;
             saveWinner(winner, numberOfMoves, this.versusAI);
@@ -180,9 +188,14 @@ export default {
   },
   created() {
     resetBoard();
+    if (this.playerOne === '') {
+      this.$router.push("/landing"); // Redirect to GameLanding if input fields are empty
+    }
   },
   mounted() {
-    this.playSpectateAI()
+    if (this.spectateAI) {
+      this.playSpectateAI();
+    }
   }
 }
 </script>

@@ -31,7 +31,7 @@ function setBoard(col, row) {
   }
 }
 
-export function checkForWin() {
+export function checkForWin(count) {
   const oneWin = '1111';
   const twoWin = '2222';
 
@@ -79,8 +79,11 @@ export function checkForWin() {
       return 2;
     }
   }
-
-  return 0;
+  if (count === 21) {
+    return 3;
+  } else {
+    return 0;
+  }
 }
 
 function styleHorizontalWin(col) {
