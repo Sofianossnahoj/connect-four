@@ -51,13 +51,15 @@
     </section>
 
     <section class="info">
-      <div>
-        <p><span class="piece">&#9679;</span>Spelare: {{ playerOne }}</p>
+      <div class="text">
+        <p>{{ playerOne }}</p>
         <p>Antal drag: {{ countPlayerOne }}</p>
+        <div class="info-circle"></div>
       </div>
-      <div>
-        <p>Spelare: {{ playerTwo }}<span class="piece">&#9679;</span></p>
+      <div class="text">
+        <p>{{ playerTwo }}</p>
         <p>Antal drag: {{ countPlayerTwo }}</p>
+        <div class="info-circle"></div>
       </div>
     </section>
     <section>
@@ -267,18 +269,43 @@ section.info {
   display: flex;
   margin-top: 1rem;
   font-family: 'Rajdhani', sans-serif;
+  font-weight: bold;
   padding-bottom: 1rem;
 }
 
-section.info div {
+section.info div.text {
   width: 200px;
   padding: 0 1rem;
   display: flex;
   justify-content: center;
   flex-direction: column;
+  position: relative;
 }
 
-section.info div:first-of-type {
+section.info div p:first-of-type {
+  font-size: 1.5rem;
+}
+
+div.info-circle {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  position: absolute;
+  top: 0;
+  z-index: -1;
+}
+
+section.info div:nth-child(1) div.info-circle {
+  background-color: #EE9292;
+  left: 0;
+}
+
+section.info div:nth-child(2) div.info-circle {
+  background-color: #DECF98;
+  right: 0;
+}
+
+section.info div.text:first-of-type {
   align-items: flex-end;
   border-right: solid 1px;
 }
@@ -290,18 +317,6 @@ section.info p {
 section.info p:first-of-type {
   display: flex;
   align-items: center;
-}
-
-section.info span.piece {
-  font-size: 3rem;
-  color: #EE9292;
-  margin: 0 0.5rem;
-  line-height: 0;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-}
-
-section.info div:nth-child(2) span {
-  color: #DECF98;
 }
 
 .new-game {
@@ -318,6 +333,7 @@ section.info div:nth-child(2) span {
   border-style: none;
   margin-bottom: 2rem;
   margin-top: 1rem;
+  cursor: pointer;
 }
 
 @media screen and (max-width: 500px) {
@@ -331,8 +347,11 @@ section.info div:nth-child(2) span {
     gap: calc(100vw * 0.02); /* Each gap is 2% of the total width to be consistent */
     padding: calc(100vw * 0.02);
   }
-  section.info div {
+  section.info div.text {
     width: 50vw;
+  }
+  section.info div.info-circle {
+    margin: 0 1rem;
   }
 }
 

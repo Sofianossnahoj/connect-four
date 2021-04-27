@@ -123,36 +123,22 @@ export default {
         playerOne: this.playerOne,
         playerTwo: "Botson",
       };
-      if (this.playerOne()){
-      this.$emit("settings", payload);
-      this.$router.push("/game");
-      }
-      if (!this.playerOne) {
-        alert("Fyll i ett namn för att spela!")
-      }
-    },
-
-    validatePlayerVsBot() {
-      if (this.playAgainstBot) {
-        return true;
-      }
-      if (!this.playAgainstBot) {
-        alert("Fyll i ett namn för att spela!");
+      if (this.validatePlayer(this.playerOne)) {
+        this.$emit("settings", payload);
+        this.$router.push("/game");
       }
     },
     submitPlayer1() {
       this.settingsplayer1 = true;
-
-      if (this.validatePlayerOne()) {
+      if (this.validatePlayer(this.playerOne)) {
         this.settingsplayer1 = false;
         this.settingsplayer2 = true;
       }
     },
-    validatePlayerOne() {
-      if (this.playerOne) {
+    validatePlayer(player) {
+      if (player !== '') {
         return true;
-      }
-      if (!this.playerOne) {
+      } else {
         alert("Fyll i ett namn för att spela!");
       }
     },
@@ -163,18 +149,10 @@ export default {
         playerTwo: this.playerTwo,
         playAgainstBot: this.playAgainstBot,
       };
-      if (this.validatePlayerTwo()) {
+      if (this.validatePlayer(this.playerTwo)) {
         this.$emit("settings", payload);
         this.$router.push("/game");
         this.settingsplayer2 = false;
-      }
-    },
-    validatePlayerTwo() {
-      if (this.playerTwo) {
-        return true;
-      }
-      if (!this.playerTwo) {
-        alert("Fyll i ett namn för att spela!");
       }
     },
     runBotGame() {
