@@ -1,5 +1,5 @@
 <template>
-  <main>
+  <main ALINK="#464545" >
     <Navigation />
     <section class="history-text">
       <h1>Spelets historia</h1>
@@ -17,7 +17,7 @@
         </ul>
       </p>
 
-      <p><b>Källor:</b> <a href="https://www.gamesver.com/a-brief-history-of-connect-4-four-in-a-row/">Gamesver</a> <a href="https://www.youtube.com/watch?v=yDWPi1pZ0Po">Numberphile</a> <a href="http://oeis.org/A212693">The OEIS Foundation</a> <a href="https://www.tradgames.org.uk/games/Four-in-a-row.htm">Tradgames</a> <a href="https://en.wikipedia.org/wiki/Connect_Four">Wikipedia</a>
+      <p class="history-links"><b>Källor:</b> <a class="history-links" href="https://www.gamesver.com/a-brief-history-of-connect-4-four-in-a-row/">Gamesver</a> <a class="history-links" href="https://www.youtube.com/watch?v=yDWPi1pZ0Po">Numberphile</a> <a class="history-links" href="http://oeis.org/A212693">The OEIS Foundation</a> <a class="history-links" href="https://www.tradgames.org.uk/games/Four-in-a-row.htm">Tradgames</a> <a class="history-links" href="https://en.wikipedia.org/wiki/Connect_Four">Wikipedia</a>
       </p>
     </section>
   </main>
@@ -47,6 +47,13 @@ main {
   max-width: 800px;
   margin-left: 5%;
   margin-right: 5%;
+}
+
+.history-links {
+  color:#464545;
+  cursor: pointer;
+  margin-left: 10px;
+  margin-top: 1.5rem;
 }
 
 .logo-markers {
