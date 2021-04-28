@@ -159,7 +159,7 @@ li:nth-child(odd) {
 }
 
 @media screen and (max-width: 500px) {
-  h1 {
+  .highscore-title {
     font-size: 36px;
   }
 }
