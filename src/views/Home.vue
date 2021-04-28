@@ -91,7 +91,7 @@ h1 {
   justify-content: center;
   align-items: center;
   text-decoration: none;
-  text-transform: uppercase;
+  text-transform: capitalize;
   cursor: pointer;
 }
 

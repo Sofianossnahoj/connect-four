@@ -7,7 +7,7 @@
     </button>
 
     <div class="title">
-      <h1 class="corner-title">FYRA I RAD</h1>
+      <h1 class="corner-title" @click="goToPage('/landing')">FYRA I RAD</h1>
     </div>
 
     <div class="nav-menu">  
@@ -83,6 +83,10 @@ export default {
   font-family: 'Ribeye', cursive;
   margin-left: 1rem;
   margin-right: 1rem;
+}
+
+.corner-title:hover {
+  cursor: pointer;
 }
 
 .hamburger-nav {
