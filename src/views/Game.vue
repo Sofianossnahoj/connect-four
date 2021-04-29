@@ -52,12 +52,12 @@
 
     <section class="info">
       <div class="text">
-        <p>{{ playerOne }}</p>
+        <p>{{ displayPlayerOne }}</p>
         <p>Antal drag: {{ countPlayerOne }}</p>
         <div class="info-circle"></div>
       </div>
       <div class="text">
-        <p>{{ playerTwo }}</p>
+        <p>{{ displayPlayerTwo }}</p>
         <p>Antal drag: {{ countPlayerTwo }}</p>
         <div class="info-circle"></div>
       </div>
@@ -76,6 +76,8 @@ import { playAIPiece } from '../game/ai.js'
 import { saveWinner } from '../game/highscore.js'
 import { resetBoard } from '../game/board.js'
 
+//import { getKey } from '../game/network.js'
+
 export default {
   components: {
     Navigation
@@ -84,13 +86,19 @@ export default {
     spectateAI: Boolean,
     versusAI: Boolean,
     playerOne: String,
-    playerTwo: String
+    playerTwo: String,
+    networkName: String,
+    versusNetwork: Boolean,
+    code: String
   },
   data() {
     return {
+      networkNumber: 0,
       playable: true,
       currentPlayer: 1,
       winner: 0,
+      displayPlayerOne: '',
+      displayPlayerTwo: '',
       countPlayerOne: 0,
       countPlayerTwo: 0,
       currentPlayerText: ''
@@ -98,6 +106,10 @@ export default {
   },
   methods: {
     getRow(e) {
+      if (this.versusNetwork) {
+        this.getRowNetwork(e);
+        return;
+      }
       const row = e.target.getAttribute('data-row');
       if (this.playable && row !== null && !this.spectateAI) {
         const played = playPiece(row, this.currentPlayer);
@@ -105,6 +117,74 @@ export default {
           this.winner = checkForWin(this.countPlayerOne);
           this.increaseCount();
           this.switchPlayer();
+        }
+      }
+    },
+    getRowNetwork(e) {
+      const row = e.target.getAttribute('data-row');
+      if (this.playable && row !== null) {
+        console.log('Inside gRN');
+        const played = playPiece(row, this.currentPlayer);
+        if (played) {
+          this.winner = checkForWin(this.countPlayerOne);
+          this.increaseCount();
+          window.network.moves.push({
+            player: this.networkNumber,
+            row: Number(row)
+            });
+          this.playable = false;
+          this.currentPlayer = this.currentPlayer === 1 ? 2 : 1;
+        }
+      }
+    },
+    async setKey() {
+        window.network = await window.store.getNetworkStore(this.code, this.keyListener);
+
+        if (window.network.names !== undefined) {
+          if (window.network.names.length >= 2) {
+            this.$router.push("/landing");
+            setTimeout(() => {
+              alert('Det här spelet är fullt!');
+            }, 100);
+            return;
+          }
+        }
+
+        window.network.currentPlayer = 1;
+        window.network.moves = [];
+        this.playable = false;
+        if (window.network.names === undefined) {
+          this.networkNumber = 1;
+          window.network.names = [this.networkName];
+          this.displayPlayerOne = this.networkName;
+        } else {
+          this.networkNumber = 2;
+          window.network.names.push(this.networkName);
+          this.displayPlayerOne = window.network.names[0];
+          this.displayPlayerTwo = this.networkName;
+        }
+        this.currentPlayerText = this.displayName(this.displayPlayerOne);
+    },
+    keyListener() {
+      if (this.displayPlayerOne === '') {
+        this.displayPlayerOne = window.network.names[0];
+      }
+      if (this.displayPlayerTwo === '') {
+        this.displayPlayerTwo = window.network.names[1];
+      }
+      if (window.network.names.length === 2) {
+        if (this.networkNumber === this.currentPlayer) {
+          this.playable = true;
+        }
+      }
+      if (window.network.moves.length) {
+        const lastMove = window.network.moves[window.network.moves.length - 1];
+        if ((lastMove.player === this.currentPlayer)&&(this.currentPlayer !== this.networkNumber)) {
+          playPiece(lastMove.row, lastMove.player);
+          this.increaseCount();
+          this.winner = checkForWin(this.countPlayerOne);
+          this.currentPlayer = this.currentPlayer === 1 ? 2 : 1;
+          this.playable = true;
         }
       }
     },
@@ -174,15 +254,15 @@ export default {
       setTimeout(() => {
       if (this.winner === 0) {
         if (this.currentPlayer === 1) {
-          this.currentPlayerText = this.displayName(this.playerOne);
+          this.currentPlayerText = this.displayName(this.displayPlayerOne);
         } else {
-          this.currentPlayerText = this.displayName(this.playerTwo);
+          this.currentPlayerText = this.displayName(this.displayPlayerTwo);
         }
       } else {
         if (this.winner === 1) {
-          this.currentPlayerText = this.playerOne + ' vann!';
+          this.currentPlayerText = this.displayPlayerOne + ' vann!';
         } else if (this.winner === 2) {
-          this.currentPlayerText =  this.playerTwo + ' vann!';
+          this.currentPlayerText =  this.displayPlayerTwo + ' vann!';
         } else {
           this.currentPlayerText = 'Oavgjort!';
         }
@@ -197,10 +277,16 @@ export default {
     }
   },
   mounted() {
-    this.currentPlayerText = this.displayName(this.playerOne);
     if (this.spectateAI) {
       this.playSpectateAI();
     }
+    if (this.versusNetwork) {
+      this.setKey();
+    } else {
+      this.displayPlayerOne = this.playerOne;
+      this.displayPlayerTwo = this.playerTwo;
+    }
+    this.currentPlayerText = this.displayName(this.displayPlayerOne);
   }
 }
 </script>

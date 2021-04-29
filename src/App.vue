@@ -5,6 +5,9 @@
                   :playerTwo="playerTwo"
                   :versusAI="playAgainstBot"
                   :spectateAI="spectateAI"
+                  :versusNetwork="versusNetwork"
+                  :networkName="networkName"
+                  :code="code"
     />
   </div>
 </template>
@@ -16,7 +19,10 @@ export default {
       playerOne: "",
       playerTwo: "",
       playAgainstBot: false, 
-      spectateAI: false
+      spectateAI: false,
+      versusNetwork: false,
+      networkName: "",
+      code: ""
     }
   },
   methods: {
@@ -25,6 +31,9 @@ export default {
       this.playerTwo = payload.playerTwo
       this.playAgainstBot = payload.playAgainstBot || false
       this.spectateAI = payload.spectateAI || false
+      this.versusNetwork = payload.versusNetwork || false
+      this.networkName = payload.networkName
+      this.code = payload.code
     }
   }
 }

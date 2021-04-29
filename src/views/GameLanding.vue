@@ -16,6 +16,12 @@
           </button>
         </article>
         <article>
+          <h2>Spela via nätverk</h2>
+          <button class="btn-playingAlternatives" v-on:click="showNetwork()">
+            Välj
+          </button>
+        </article>
+        <article>
           <h2>Spela mot en Bot</h2>
           <button class="btn-playingAlternatives" v-on:click="showBot()">
             Välj
@@ -68,6 +74,48 @@
         </button>
       </article>
 
+      <!-- setting for network -->
+      <article v-show="settingsNetwork">
+        <h3>Spela via nätverk</h3>
+        <div class="form">
+          <label>Namn:</label>
+          <input
+            @keypress.enter="submitNetwork()"
+            type="text"
+            class="input-name"
+            name="playerName"
+            v-model="playerOne"
+            required
+          />
+        </div>
+        <button class="btn-playingAlternatives" v-on:click="submitNetwork()">
+          Spelare ok!
+        </button>
+      </article>
+
+      <article v-show="setUpNetwork">
+      <h3>Inställningar för nätverk</h3>
+        <div class="form">
+          <label>Kod:</label>
+          <input
+            @keypress.enter="playNetwork()"
+            type="text"
+            class="input-name"
+            name="playerName"
+            v-model="code"
+            required
+          />
+        </div>
+        <button class="btn-playingAlternatives" v-on:click="playNetwork()">
+          {{ networkButton }}
+        </button>
+        <p>eller</p>
+        <button class="btn-playingAlternatives" v-on:click="getCode()">
+          Skapa ett spel!
+        </button>
+        <p>{{ generatedCode }}</p>
+      </article>
+
       <!-- when player against bot-->
       <article v-show="playAgainstBot">
         <h2>Spela mot en bot</h2>
@@ -95,14 +143,20 @@
 
 <script>
 import NavigationMenu from "../components/Navigation";
+
+import { getKey } from "../game/network.js"
+
 export default {
   data() {
     return {
       playerOne: "",
       playerTwo: "",
+      code: "",
       playAgainstBot: false,
       settingsplayer1: false,
       settingsplayer2: false,
+      settingsNetwork: false,
+      setUpNetwork: false,
       playingAlternatives: true,
     };
   },
@@ -116,6 +170,17 @@ export default {
     showBot() {
       this.playAgainstBot = true;
       this.playingAlternatives = false;
+    },
+    showNetwork() {
+      this.settingsNetwork = true;
+      this.playingAlternatives = false;
+    },
+    async getCode() {
+      this.code = await getKey();
+    },
+    submitNetwork() {
+      this.settingsNetwork = false;
+      this.setUpNetwork = true;
     },
     submitPlayerVsBot() {
       const payload = {
@@ -155,6 +220,17 @@ export default {
         this.settingsplayer2 = false;
       }
     },
+    playNetwork() {
+      const payload = {
+        networkName: this.playerOne,
+        versusNetwork: true,
+        playerOne: " ",
+        playerTwo: " ",
+        code: this.code
+      }
+        this.$emit("settings", payload);
+        this.$router.push("/game");
+    },
     runBotGame() {
       const payload = {
         playerOne: "Mr Bot",
@@ -165,6 +241,22 @@ export default {
       this.$router.push("/game");
     },
   },
+  computed: {
+    generatedCode() {
+      if (this.code !== "") {
+        return "Dela med dig av koden till din vän: " + this.code;
+      } else {
+        return "";
+      }
+    },
+    networkButton() {
+      if (this.code !== "") {
+        return "Spela!";
+      } else {
+        return "Gå med i ett spel!";
+      }
+    }
+  }
 };
 </script>
 
