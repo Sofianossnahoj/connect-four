@@ -76,8 +76,6 @@ import { playAIPiece } from '../game/ai.js'
 import { saveWinner } from '../game/highscore.js'
 import { resetBoard } from '../game/board.js'
 
-//import { getKey } from '../game/network.js'
-
 export default {
   components: {
     Navigation
@@ -123,7 +121,6 @@ export default {
     getRowNetwork(e) {
       const row = e.target.getAttribute('data-row');
       if (this.playable && row !== null) {
-        console.log('Inside gRN');
         const played = playPiece(row, this.currentPlayer);
         if (played) {
           this.winner = checkForWin(this.countPlayerOne);
@@ -245,7 +242,7 @@ export default {
           if (this.versusAI && this.winner === 2) return; // If playing against AI and AI won, do nothing
           if (this.spectateAI) return; // If spectating AI do nothing
           if (winner === 3) return; // If draw do nothing
-            const winner = this.winner === 1 ? this.playerOne : this.playerTwo;
+            const winner = this.winner === 1 ? this.displayPlayerOne : this.displayPlayerTwo;
             const numberOfMoves = this.winner === 1 ? this.countPlayerOne : this.countPlayerTwo;
             saveWinner(winner, numberOfMoves, this.versusAI);
       }

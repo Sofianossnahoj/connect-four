@@ -1,6 +1,6 @@
 <template>
   <main>
-    <navigationMenu />
+    <Navigation @refresh="refreshPage" />
     <section class="game-info">
       <p>
         I det klassiska spelet <i>Fyra i rad</i> spelar du för att vinna
@@ -142,7 +142,7 @@
 </template>
 
 <script>
-import NavigationMenu from "../components/Navigation";
+import Navigation from '../components/Navigation.vue';
 
 import { getKey } from "../game/network.js"
 
@@ -160,9 +160,18 @@ export default {
       playingAlternatives: true,
     };
   },
-  components: { NavigationMenu },
-
+  components: {
+    Navigation 
+  },
   methods: {
+    refreshPage() {
+      this.playAgainstBot = false;
+      this.settingsplayer1 = false;
+      this.settingsplayer2 = false;
+      this.settingsNetwork = false;
+      this.setUpNetwork = false;
+      this.playingAlternatives = true;
+    },
     showPlayer() {
       this.settingsplayer1 = true;
       this.playingAlternatives = false;

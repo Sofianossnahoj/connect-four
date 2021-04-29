@@ -39,6 +39,11 @@ export default {
       const currentPage = this.$route.path;
       if (currentPage !== page) {
         this.$router.push(page);
+      } else if (currentPage === '/landing') {
+        this.navOpen = false;
+        this.$emit('refresh');
+      } else {
+        this.navOpen = false;
       }
     }
   }
