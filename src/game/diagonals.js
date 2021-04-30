@@ -1,6 +1,6 @@
-import board from './board.js'
+import { board } from './board.js'
 
-export default function getDiagonals() {
+export function getDiagonals() {
   const diagonals = [];
 
   diagonals.push(
@@ -19,6 +19,101 @@ export default function getDiagonals() {
     board[1][6].toString() + board[2][5].toString() + board[3][4].toString() + board[4][3].toString() + board[5][2].toString(),
     board[2][6].toString() + board[3][5].toString() + board[4][4].toString() + board[5][3].toString(),
   )
-  
+
+  return diagonals;
+}
+
+export function getDiagonalStyle() {
+  const diagonals = [];
+
+  diagonals.push(
+    // Direction back-slash
+    [
+      document.querySelector('[data-col="2"][data-row="0"]'),
+      document.querySelector('[data-col="3"][data-row="1"]'),
+      document.querySelector('[data-col="4"][data-row="2"]'),
+      document.querySelector('[data-col="5"][data-row="3"]')
+    ],
+    [
+      document.querySelector('[data-col="1"][data-row="0"]'),
+      document.querySelector('[data-col="2"][data-row="1"]'),
+      document.querySelector('[data-col="3"][data-row="2"]'),
+      document.querySelector('[data-col="4"][data-row="3"]'),
+      document.querySelector('[data-col="5"][data-row="4"]')
+    ],
+    [
+      document.querySelector('[data-col="0"][data-row="0"]'),
+      document.querySelector('[data-col="1"][data-row="1"]'),
+      document.querySelector('[data-col="2"][data-row="2"]'),
+      document.querySelector('[data-col="3"][data-row="3"]'),
+      document.querySelector('[data-col="4"][data-row="4"]'),
+      document.querySelector('[data-col="5"][data-row="5"]')
+    ],
+    [
+      document.querySelector('[data-col="0"][data-row="1"]'),
+      document.querySelector('[data-col="1"][data-row="2"]'),
+      document.querySelector('[data-col="2"][data-row="3"]'),
+      document.querySelector('[data-col="3"][data-row="4"]'),
+      document.querySelector('[data-col="4"][data-row="5"]'),
+      document.querySelector('[data-col="5"][data-row="6"]')
+    ],
+    [
+      document.querySelector('[data-col="0"][data-row="2"]'),
+      document.querySelector('[data-col="1"][data-row="3"]'),
+      document.querySelector('[data-col="2"][data-row="4"]'),
+      document.querySelector('[data-col="3"][data-row="5"]'),
+      document.querySelector('[data-col="4"][data-row="6"]')
+    ],
+    [
+      document.querySelector('[data-col="0"][data-row="3"]'),
+      document.querySelector('[data-col="1"][data-row="4"]'),
+      document.querySelector('[data-col="2"][data-row="5"]'),
+      document.querySelector('[data-col="3"][data-row="6"]')
+    ],
+    // Direction slash
+    [
+      document.querySelector('[data-col="0"][data-row="3"]'),
+      document.querySelector('[data-col="1"][data-row="2"]'),
+      document.querySelector('[data-col="2"][data-row="1"]'),
+      document.querySelector('[data-col="3"][data-row="0"]')
+    ],
+    [
+      document.querySelector('[data-col="0"][data-row="4"]'),
+      document.querySelector('[data-col="1"][data-row="3"]'),
+      document.querySelector('[data-col="2"][data-row="2"]'),
+      document.querySelector('[data-col="3"][data-row="1"]'),
+      document.querySelector('[data-col="4"][data-row="0"]')
+    ],
+    [
+      document.querySelector('[data-col="0"][data-row="5"]'),
+      document.querySelector('[data-col="1"][data-row="4"]'),
+      document.querySelector('[data-col="2"][data-row="3"]'),
+      document.querySelector('[data-col="3"][data-row="2"]'),
+      document.querySelector('[data-col="4"][data-row="1"]'),
+      document.querySelector('[data-col="5"][data-row="0"]')
+    ],
+    [
+      document.querySelector('[data-col="0"][data-row="6"]'),
+      document.querySelector('[data-col="1"][data-row="5"]'),
+      document.querySelector('[data-col="2"][data-row="4"]'),
+      document.querySelector('[data-col="3"][data-row="3"]'),
+      document.querySelector('[data-col="4"][data-row="2"]'),
+      document.querySelector('[data-col="5"][data-row="1"]')
+    ],
+    [
+      document.querySelector('[data-col="1"][data-row="6"]'),
+      document.querySelector('[data-col="2"][data-row="5"]'),
+      document.querySelector('[data-col="3"][data-row="4"]'),
+      document.querySelector('[data-col="4"][data-row="3"]'),
+      document.querySelector('[data-col="5"][data-row="2"]')
+    ],
+    [
+      document.querySelector('[data-col="2"][data-row="6"]'),
+      document.querySelector('[data-col="3"][data-row="5"]'),
+      document.querySelector('[data-col="4"][data-row="4"]'),
+      document.querySelector('[data-col="5"][data-row="3"]')
+    ]
+  )
+
   return diagonals;
 }
