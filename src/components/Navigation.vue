@@ -1,6 +1,5 @@
 <template>
   <div class="nav-bar">
-    
     <button @click="navOpen = !navOpen" class="hamburger-nav">
       <span v-if="!navOpen">&#9776;</span>
       <span v-else>&#x2715;</span>
@@ -10,7 +9,7 @@
       <h1 class="corner-title" @click="goToPage('/landing')">FYRA I RAD</h1>
     </div>
 
-    <div class="nav-menu">  
+    <div class="nav-menu">
       <button class="menu-button" @click="goToPage('/landing')">START</button>
       <button class="menu-button" @click="goToPage('/rules')">REGLER</button>
       <button class="menu-button" @click="goToPage('/history')">HISTORIA</button>
@@ -23,13 +22,12 @@
       <button class="menu-button" @click="goToPage('/history')">HISTORIA</button>
       <button class="menu-button" @click="goToPage('/highscore')">TOPP 10</button>
     </div>
-
   </div>
 </template>
 
 <script>
 export default {
-   data() {
+  data() {
     return {
       navOpen: false,
     };
@@ -39,14 +37,14 @@ export default {
       const currentPage = this.$route.path;
       if (currentPage !== page) {
         this.$router.push(page);
-      } else if (currentPage === '/landing') {
+      } else if (currentPage === "/landing") {
         this.navOpen = false;
-        this.$emit('refresh');
+        this.$emit("refresh");
       } else {
         this.navOpen = false;
       }
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -60,7 +58,7 @@ export default {
   margin: 1rem;
   cursor: pointer;
   color: #464545;
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
   font-size: 14pt;
   border: 0;
   outline: 0;
@@ -68,9 +66,9 @@ export default {
 }
 
 .menu-button:hover {
-  background-color: #EE9292; 
+  background-color: #ee9292;
   color: #464545;
-  box-shadow: 1px 8px 8px 0 rgba(0,0,0,0.2);
+  box-shadow: 1px 8px 8px 0 rgba(0, 0, 0, 0.2);
 }
 
 .nav-bar {
@@ -85,7 +83,7 @@ export default {
 
 .corner-title {
   color: #b6d4c6;
-  font-family: 'Ribeye', cursive;
+  font-family: "Ribeye", cursive;
   margin-left: 1rem;
   margin-right: 1rem;
 }
@@ -98,8 +96,8 @@ export default {
   color: #464545;
   font-size: 2.5rem;
   margin-left: 1rem;
-  margin-bottom: .3rem;
-  background-color:  #b6d4c6;
+  margin-bottom: 0.3rem;
+  background-color: #b6d4c6;
   border: 0;
   outline: 0;
   cursor: pointer;
@@ -122,7 +120,7 @@ export default {
 .nav-expanded .menu-button {
   display: flex;
   align-items: left;
-  margin: .5rem;
+  margin: 0.5rem;
   font-size: 1.3rem;
   color: #464545;
 }

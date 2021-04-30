@@ -1,5 +1,5 @@
 <template>
-  <main ALINK="#464545" >
+  <main ALINK="#464545">
     <Navigation />
     <section class="history-text">
       <h1>Spelets historia</h1>
@@ -24,13 +24,13 @@
 </template>
 
 <script>
-import Navigation from '../components/Navigation.vue'
+import Navigation from "../components/Navigation.vue";
 
 export default {
   components: {
-    Navigation
-  }
-}
+    Navigation,
+  },
+};
 </script>
 
 <style scoped>
@@ -50,7 +50,7 @@ main {
 }
 
 .history-links {
-  color:#464545;
+  color: #464545;
   cursor: pointer;
   margin-left: 10px;
   margin-top: 1.5rem;
@@ -63,13 +63,15 @@ main {
 }
 
 h1 {
-  font-family: 'Rajdhani', sans-serif;
+  font-family: "Rajdhani", sans-serif;
   font-size: 70px;
   margin-bottom: 0;
 }
 
 p {
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
+  font-size: 1.2rem;
+  line-height: 1.8;
 }
 
 @media screen and (max-width: 500px) {
@@ -77,5 +79,4 @@ p {
     font-size: 36px;
   }
 }
-
 </style>

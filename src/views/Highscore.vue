@@ -24,49 +24,49 @@
 </template>
 
 <script>
-import Navigation from '../components/Navigation.vue'
+import Navigation from "../components/Navigation.vue";
 
-import { getHighscore } from '../game/highscore.js'
+import { getHighscore } from "../game/highscore.js";
 
 export default {
   components: {
-    Navigation
+    Navigation,
   },
   data() {
     return {
       highscore: [],
-      ai: false
-    }
+      ai: false,
+    };
   },
   methods: {
     toggleHighscore() {
       this.ai = !this.ai;
-      this.getHighscores(); 
+      this.getHighscores();
     },
     getHighscores() {
       this.highscore = getHighscore(this.ai);
-    }
+    },
   },
   mounted() {
-    this.getHighscores(); 
+    this.getHighscores();
   },
   computed: {
     toggleText() {
       if (this.ai) {
-        return 'Visa spel mot en vän';
+        return "Visa spel mot en vän";
       } else {
-        return 'Visa spel mot datorn';
+        return "Visa spel mot datorn";
       }
     },
     displayText() {
       if (this.ai) {
-        return '- Mot datorn';
+        return "- Mot datorn";
       } else {
-        return '- Mot vänner';
+        return "- Mot vänner";
       }
-    }
-  }
-}
+    },
+  },
+};
 </script>
 
 <style scoped>
@@ -99,7 +99,7 @@ button {
 }
 
 .highscore-title {
-  font-family: 'Rajdhani', sans-serif;
+  font-family: "Rajdhani", sans-serif;
   font-size: 70px;
   color: #464545;
   margin: 0;
@@ -112,7 +112,7 @@ section.display-text {
 }
 
 p {
-  font-family: 'Rajdhani', sans-serif;
+  font-family: "Rajdhani", sans-serif;
   font-size: 20pt;
   font-weight: bold;
   color: #464545;
@@ -120,7 +120,7 @@ p {
 }
 
 ul.top-list {
-  font-family: 'Rajdhani', sans-serif;
+  font-family: "Rajdhani", sans-serif;
   font-size: 2rem;
   font-weight: bold;
   width: 800px;
@@ -138,11 +138,10 @@ li {
 }
 
 li:nth-child(odd) {
-  background-color: #DECF98;
+  background-color: #decf98;
 }
 
 @media screen and (max-width: 800px) {
-
   ul.top-list,
   .highscore {
     width: 100vw;
@@ -163,5 +162,4 @@ li:nth-child(odd) {
     font-size: 36px;
   }
 }
-
 </style>

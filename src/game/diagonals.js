@@ -19,7 +19,7 @@ export function getDiagonals() {
     board[1][6].toString() + board[2][5].toString() + board[3][4].toString() + board[4][3].toString() + board[5][2].toString(),
     board[2][6].toString() + board[3][5].toString() + board[4][4].toString() + board[5][3].toString(),
   )
-  
+
   return diagonals;
 }
 

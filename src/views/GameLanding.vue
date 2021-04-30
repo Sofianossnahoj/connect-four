@@ -33,7 +33,11 @@
             Välj
           </button>
         </article>
-        <img class="logo-markers" src="../assets/LogoMarkers.svg" alt="Markers">
+        <img
+          class="logo-markers"
+          src="../assets/LogoMarkers.svg"
+          alt="Markers"
+        />
       </section>
 
       <!-- settings for player 1-->
@@ -53,6 +57,10 @@
         <button class="btn-playingAlternatives" v-on:click="submitPlayer1()">
           Spelare 1 ok!
         </button>
+        <p class="error" v-if="error">
+          <i class="material-icons">error</i>
+          Fyll i ett namn för att spela!
+        </p>
       </article>
 
       <!-- settings for player 2-->
@@ -72,6 +80,10 @@
         <button class="btn-playingAlternatives" v-on:click="submitPlayer2()">
           Spelare 2 ok!
         </button>
+        <p class="error" v-if="error">
+          <i class="material-icons">error</i>
+          Fyll i ett namn för att spela!
+        </p>
       </article>
 
       <!-- setting for network -->
@@ -91,10 +103,14 @@
         <button class="btn-playingAlternatives" v-on:click="submitNetwork()">
           Spelare ok!
         </button>
+        <p class="error" v-if="error">
+          <i class="material-icons">error</i>
+          Fyll i ett namn för att spela!
+        </p>
       </article>
 
       <article v-show="setUpNetwork">
-      <h3>Inställningar för nätverk</h3>
+        <h3>Inställningar för nätverk</h3>
         <div class="form">
           <label>Kod:</label>
           <input
@@ -136,15 +152,19 @@
         >
           Spelare ok
         </button>
+        <p class="error" v-if="error">
+          <i class="material-icons">error</i>
+          Fyll i ett namn för att spela!
+        </p>
       </article>
     </section>
   </main>
 </template>
 
 <script>
-import Navigation from '../components/Navigation.vue';
+import Navigation from "../components/Navigation.vue";
 
-import { getKey } from "../game/network.js"
+import { getKey } from "../game/network.js";
 
 export default {
   data() {
@@ -158,10 +178,11 @@ export default {
       settingsNetwork: false,
       setUpNetwork: false,
       playingAlternatives: true,
+      error: false,
     };
   },
   components: {
-    Navigation 
+    Navigation,
   },
   methods: {
     refreshPage() {
@@ -188,8 +209,11 @@ export default {
       this.code = await getKey();
     },
     submitNetwork() {
-      this.settingsNetwork = false;
-      this.setUpNetwork = true;
+      if (this.validatePlayer(this.playerOne)) {
+        this.settingsNetwork = false;
+        this.setUpNetwork = true;
+        this.error = false;
+      }
     },
     submitPlayerVsBot() {
       const payload = {
@@ -207,13 +231,14 @@ export default {
       if (this.validatePlayer(this.playerOne)) {
         this.settingsplayer1 = false;
         this.settingsplayer2 = true;
+        this.error = false;
       }
     },
     validatePlayer(player) {
-      if (player !== '') {
+      if (player !== "") {
         return true;
       } else {
-        alert("Fyll i ett namn för att spela!");
+        this.error = true;
       }
     },
     submitPlayer2() {
@@ -227,6 +252,7 @@ export default {
         this.$emit("settings", payload);
         this.$router.push("/game");
         this.settingsplayer2 = false;
+        this.error = false;
       }
     },
     playNetwork() {
@@ -235,10 +261,13 @@ export default {
         versusNetwork: true,
         playerOne: " ",
         playerTwo: " ",
-        code: this.code
-      }
+        code: this.code,
+      };
+      if (this.code.length === 6) {
         this.$emit("settings", payload);
         this.$router.push("/game");
+        this.error = false;
+      }
     },
     runBotGame() {
       const payload = {
@@ -252,20 +281,20 @@ export default {
   },
   computed: {
     generatedCode() {
-      if (this.code !== "") {
+      if (this.code.length === 6) {
         return "Dela med dig av koden till din vän: " + this.code;
       } else {
         return "";
       }
     },
     networkButton() {
-      if (this.code !== "") {
+      if (this.code.length === 6) {
         return "Spela!";
       } else {
         return "Gå med i ett spel!";
       }
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -325,7 +354,7 @@ h3 {
 }
 .logo-markers {
   height: 100%;
-  width:100%; 
+  width: 100%;
   margin-top: 1.5rem;
 }
 
@@ -335,6 +364,13 @@ p {
   font-family: "Open Sans", sans-serif;
   width: 80%;
   max-width: 800px;
+}
+p.error {
+  display: flex;
+  align-items: center;
+}
+p.error i {
+  margin-right: 0.5rem;
 }
 .form {
   display: flex;

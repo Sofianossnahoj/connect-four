@@ -3,51 +3,51 @@
     <Navigation />
     <span class="current">{{ currentPlayerText }}</span>
     <section class="game">
-    <img src="@/assets/skeleton.png" alt="">
-    <div class="game" @click="getRow">
-      <div class="circle" data-col="0" data-row="0"></div>
-      <div class="circle" data-col="0" data-row="1"></div>
-      <div class="circle" data-col="0" data-row="2"></div>
-      <div class="circle" data-col="0" data-row="3"></div>
-      <div class="circle" data-col="0" data-row="4"></div>
-      <div class="circle" data-col="0" data-row="5"></div>
-      <div class="circle" data-col="0" data-row="6"></div>
-      <div class="circle" data-col="1" data-row="0"></div>
-      <div class="circle" data-col="1" data-row="1"></div>
-      <div class="circle" data-col="1" data-row="2"></div>
-      <div class="circle" data-col="1" data-row="3"></div>
-      <div class="circle" data-col="1" data-row="4"></div>
-      <div class="circle" data-col="1" data-row="5"></div>
-      <div class="circle" data-col="1" data-row="6"></div>
-      <div class="circle" data-col="2" data-row="0"></div>
-      <div class="circle" data-col="2" data-row="1"></div>
-      <div class="circle" data-col="2" data-row="2"></div>
-      <div class="circle" data-col="2" data-row="3"></div>
-      <div class="circle" data-col="2" data-row="4"></div>
-      <div class="circle" data-col="2" data-row="5"></div>
-      <div class="circle" data-col="2" data-row="6"></div>
-      <div class="circle" data-col="3" data-row="0"></div>
-      <div class="circle" data-col="3" data-row="1"></div>
-      <div class="circle" data-col="3" data-row="2"></div>
-      <div class="circle" data-col="3" data-row="3"></div>
-      <div class="circle" data-col="3" data-row="4"></div>
-      <div class="circle" data-col="3" data-row="5"></div>
-      <div class="circle" data-col="3" data-row="6"></div>
-      <div class="circle" data-col="4" data-row="0"></div>
-      <div class="circle" data-col="4" data-row="1"></div>
-      <div class="circle" data-col="4" data-row="2"></div>
-      <div class="circle" data-col="4" data-row="3"></div>
-      <div class="circle" data-col="4" data-row="4"></div>
-      <div class="circle" data-col="4" data-row="5"></div>
-      <div class="circle" data-col="4" data-row="6"></div>
-      <div class="circle" data-col="5" data-row="0"></div>
-      <div class="circle" data-col="5" data-row="1"></div>
-      <div class="circle" data-col="5" data-row="2"></div>
-      <div class="circle" data-col="5" data-row="3"></div>
-      <div class="circle" data-col="5" data-row="4"></div>
-      <div class="circle" data-col="5" data-row="5"></div>
-      <div class="circle" data-col="5" data-row="6"></div>
-    </div>
+      <img src="@/assets/Skeleton.png" alt="" />
+      <div class="game" @click="getRow">
+        <div class="circle" data-col="0" data-row="0"></div>
+        <div class="circle" data-col="0" data-row="1"></div>
+        <div class="circle" data-col="0" data-row="2"></div>
+        <div class="circle" data-col="0" data-row="3"></div>
+        <div class="circle" data-col="0" data-row="4"></div>
+        <div class="circle" data-col="0" data-row="5"></div>
+        <div class="circle" data-col="0" data-row="6"></div>
+        <div class="circle" data-col="1" data-row="0"></div>
+        <div class="circle" data-col="1" data-row="1"></div>
+        <div class="circle" data-col="1" data-row="2"></div>
+        <div class="circle" data-col="1" data-row="3"></div>
+        <div class="circle" data-col="1" data-row="4"></div>
+        <div class="circle" data-col="1" data-row="5"></div>
+        <div class="circle" data-col="1" data-row="6"></div>
+        <div class="circle" data-col="2" data-row="0"></div>
+        <div class="circle" data-col="2" data-row="1"></div>
+        <div class="circle" data-col="2" data-row="2"></div>
+        <div class="circle" data-col="2" data-row="3"></div>
+        <div class="circle" data-col="2" data-row="4"></div>
+        <div class="circle" data-col="2" data-row="5"></div>
+        <div class="circle" data-col="2" data-row="6"></div>
+        <div class="circle" data-col="3" data-row="0"></div>
+        <div class="circle" data-col="3" data-row="1"></div>
+        <div class="circle" data-col="3" data-row="2"></div>
+        <div class="circle" data-col="3" data-row="3"></div>
+        <div class="circle" data-col="3" data-row="4"></div>
+        <div class="circle" data-col="3" data-row="5"></div>
+        <div class="circle" data-col="3" data-row="6"></div>
+        <div class="circle" data-col="4" data-row="0"></div>
+        <div class="circle" data-col="4" data-row="1"></div>
+        <div class="circle" data-col="4" data-row="2"></div>
+        <div class="circle" data-col="4" data-row="3"></div>
+        <div class="circle" data-col="4" data-row="4"></div>
+        <div class="circle" data-col="4" data-row="5"></div>
+        <div class="circle" data-col="4" data-row="6"></div>
+        <div class="circle" data-col="5" data-row="0"></div>
+        <div class="circle" data-col="5" data-row="1"></div>
+        <div class="circle" data-col="5" data-row="2"></div>
+        <div class="circle" data-col="5" data-row="3"></div>
+        <div class="circle" data-col="5" data-row="4"></div>
+        <div class="circle" data-col="5" data-row="5"></div>
+        <div class="circle" data-col="5" data-row="6"></div>
+      </div>
     </section>
 
     <section class="info">
@@ -69,16 +69,16 @@
 </template>
 
 <script>
-import Navigation from '../components/Navigation.vue'
+import Navigation from "../components/Navigation.vue";
 
-import { playPiece, checkForWin } from '../game/mechanics.js'
-import { playAIPiece } from '../game/ai.js'
-import { saveWinner } from '../game/highscore.js'
-import { resetBoard } from '../game/board.js'
+import { playPiece, checkForWin } from "../game/mechanics.js";
+import { playAIPiece } from "../game/ai.js";
+import { saveWinner } from "../game/highscore.js";
+import { resetBoard } from "../game/board.js";
 
 export default {
   components: {
-    Navigation
+    Navigation,
   },
   props: {
     spectateAI: Boolean,
@@ -87,7 +87,7 @@ export default {
     playerTwo: String,
     networkName: String,
     versusNetwork: Boolean,
-    code: String
+    code: String,
   },
   data() {
     return {
@@ -95,12 +95,12 @@ export default {
       playable: true,
       currentPlayer: 1,
       winner: 0,
-      displayPlayerOne: '',
-      displayPlayerTwo: '',
+      displayPlayerOne: "",
+      displayPlayerTwo: "",
       countPlayerOne: 0,
       countPlayerTwo: 0,
-      currentPlayerText: ''
-    }
+      currentPlayerText: "",
+    };
   },
   methods: {
     getRow(e) {
@@ -108,7 +108,7 @@ export default {
         this.getRowNetwork(e);
         return;
       }
-      const row = e.target.getAttribute('data-row');
+      const row = e.target.getAttribute("data-row");
       if (this.playable && row !== null && !this.spectateAI) {
         const played = playPiece(row, this.currentPlayer);
         if (played) {
@@ -119,7 +119,7 @@ export default {
       }
     },
     getRowNetwork(e) {
-      const row = e.target.getAttribute('data-row');
+      const row = e.target.getAttribute("data-row");
       if (this.playable && row !== null) {
         const played = playPiece(row, this.currentPlayer);
         if (played) {
@@ -127,46 +127,49 @@ export default {
           this.increaseCount();
           window.network.moves.push({
             player: this.networkNumber,
-            row: Number(row)
-            });
+            row: Number(row),
+          });
           this.playable = false;
           this.currentPlayer = this.currentPlayer === 1 ? 2 : 1;
         }
       }
     },
     async setKey() {
-        window.network = await window.store.getNetworkStore(this.code, this.keyListener);
+      window.network = await window.store.getNetworkStore(
+        this.code,
+        this.keyListener
+      );
 
-        if (window.network.names !== undefined) {
-          if (window.network.names.length >= 2) {
-            this.$router.push("/landing");
-            setTimeout(() => {
-              alert('Det här spelet är fullt!');
-            }, 100);
-            return;
-          }
+      if (window.network.names !== undefined) {
+        if (window.network.names.length >= 2) {
+          this.$router.push("/landing");
+          setTimeout(() => {
+            alert("Det här spelet är fullt!");
+          }, 100);
+          return;
         }
+      }
 
-        window.network.currentPlayer = 1;
-        window.network.moves = [];
-        this.playable = false;
-        if (window.network.names === undefined) {
-          this.networkNumber = 1;
-          window.network.names = [this.networkName];
-          this.displayPlayerOne = this.networkName;
-        } else {
-          this.networkNumber = 2;
-          window.network.names.push(this.networkName);
-          this.displayPlayerOne = window.network.names[0];
-          this.displayPlayerTwo = this.networkName;
-        }
-        this.currentPlayerText = this.displayName(this.displayPlayerOne);
+      window.network.currentPlayer = 1;
+      window.network.moves = [];
+      this.playable = false;
+      if (window.network.names === undefined) {
+        this.networkNumber = 1;
+        window.network.names = [this.networkName];
+        this.displayPlayerOne = this.networkName;
+      } else {
+        this.networkNumber = 2;
+        window.network.names.push(this.networkName);
+        this.displayPlayerOne = window.network.names[0];
+        this.displayPlayerTwo = this.networkName;
+      }
+      this.currentPlayerText = this.displayName(this.displayPlayerOne);
     },
     keyListener() {
-      if (this.displayPlayerOne === '') {
+      if (this.displayPlayerOne === "") {
         this.displayPlayerOne = window.network.names[0];
       }
-      if (this.displayPlayerTwo === '') {
+      if (this.displayPlayerTwo === "") {
         this.displayPlayerTwo = window.network.names[1];
       }
       if (window.network.names.length === 2) {
@@ -176,7 +179,10 @@ export default {
       }
       if (window.network.moves.length) {
         const lastMove = window.network.moves[window.network.moves.length - 1];
-        if ((lastMove.player === this.currentPlayer)&&(this.currentPlayer !== this.networkNumber)) {
+        if (
+          lastMove.player === this.currentPlayer &&
+          this.currentPlayer !== this.networkNumber
+        ) {
           playPiece(lastMove.row, lastMove.player);
           this.increaseCount();
           this.winner = checkForWin(this.countPlayerOne);
@@ -187,9 +193,9 @@ export default {
     },
     increaseCount() {
       if (this.currentPlayer === 1) {
-        this.countPlayerOne ++;
+        this.countPlayerOne++;
       } else {
-        this.countPlayerTwo ++;
+        this.countPlayerTwo++;
       }
     },
     switchPlayer() {
@@ -218,58 +224,62 @@ export default {
     playSpectateAI() {
       if (!this.playable) return;
       if (this.winner === 0) {
-        const randomTime = Math.floor((Math.random() * 1000) + 1000);
-        setTimeout( () => {
+        const randomTime = Math.floor(Math.random() * 1000 + 1000);
+        setTimeout(() => {
           playAIPiece(this.currentPlayer);
           this.winner = checkForWin(this.countPlayerOne);
           this.increaseCount();
-          this.currentPlayer = (this.currentPlayer === 1 ? 2 : 1);
+          this.currentPlayer = this.currentPlayer === 1 ? 2 : 1;
           this.playSpectateAI();
         }, randomTime);
       }
     },
     displayName(name) {
-      return (name.charAt(name.length - 1) === 's') ? name + ' tur' : name + 's tur';
+      return name.charAt(name.length - 1) === "s"
+        ? name + " tur"
+        : name + "s tur";
     },
     resetGame() {
       this.$router.push("/landing");
-    }
+    },
   },
   watch: {
     winner() {
       if (this.winner !== 0) {
         this.playable = false;
-          if (this.versusAI && this.winner === 2) return; // If playing against AI and AI won, do nothing
-          if (this.spectateAI) return; // If spectating AI do nothing
-          if (winner === 3) return; // If draw do nothing
-            const winner = this.winner === 1 ? this.displayPlayerOne : this.displayPlayerTwo;
-            const numberOfMoves = this.winner === 1 ? this.countPlayerOne : this.countPlayerTwo;
-            saveWinner(winner, numberOfMoves, this.versusAI);
+        if (this.versusAI && this.winner === 2) return; // If playing against AI and AI won, do nothing
+        if (this.spectateAI) return; // If spectating AI do nothing
+        if (winner === 3) return; // If draw do nothing
+        const winner =
+          this.winner === 1 ? this.displayPlayerOne : this.displayPlayerTwo;
+        const numberOfMoves =
+          this.winner === 1 ? this.countPlayerOne : this.countPlayerTwo;
+        saveWinner(winner, numberOfMoves, this.versusAI);
       }
     },
     currentPlayer() {
       setTimeout(() => {
-      if (this.winner === 0) {
-        if (this.currentPlayer === 1) {
-          this.currentPlayerText = this.displayName(this.displayPlayerOne);
+        if (this.winner === 0) {
+          if (this.currentPlayer === 1) {
+            this.currentPlayerText = this.displayName(this.displayPlayerOne);
+          } else {
+            this.currentPlayerText = this.displayName(this.displayPlayerTwo);
+          }
         } else {
-          this.currentPlayerText = this.displayName(this.displayPlayerTwo);
+          if (this.winner === 1) {
+            this.currentPlayerText = this.displayPlayerOne + " vann!";
+          } else if (this.winner === 2) {
+            this.currentPlayerText = this.displayPlayerTwo + " vann!";
+          } else {
+            this.currentPlayerText = "Oavgjort!";
+          }
         }
-      } else {
-        if (this.winner === 1) {
-          this.currentPlayerText = this.displayPlayerOne + ' vann!';
-        } else if (this.winner === 2) {
-          this.currentPlayerText =  this.displayPlayerTwo + ' vann!';
-        } else {
-          this.currentPlayerText = 'Oavgjort!';
-        }
-      }
       }, 500);
-    }
+    },
   },
   created() {
     resetBoard();
-    if (this.playerOne === '') {
+    if (this.playerOne === "") {
       this.$router.push("/landing"); // Redirect to GameLanding if input fields are empty
     }
   },
@@ -284,8 +294,8 @@ export default {
       this.displayPlayerTwo = this.playerTwo;
     }
     this.currentPlayerText = this.displayName(this.displayPlayerOne);
-  }
-}
+  },
+};
 </script>
 
 <style scoped>
@@ -322,27 +332,27 @@ section.game img {
 div.game div {
   width: 60px;
   height: 60px;
-  background-color: #B6D4C6;
+  background-color: #b6d4c6;
   border-radius: 50%;
   cursor: pointer;
 }
 
 div.game div.player-one {
-  background-color: #EE9292;
+  background-color: #ee9292;
 }
 
 div.game div.win {
-  background-image: url('../assets/star.png');
+  background-image: url("../assets/Star.png");
   background-position: center;
   background-size: cover;
 }
 
 div.game div.player-two {
-  background-color: #DECF98;
+  background-color: #decf98;
 }
 
 span.current {
-  font-family: 'Ribeye', cursive;
+  font-family: "Ribeye", cursive;
   font-size: 2rem;
   margin-top: 2rem;
   color: #464545;
@@ -351,7 +361,7 @@ span.current {
 section.info {
   display: flex;
   margin-top: 1rem;
-  font-family: 'Rajdhani', sans-serif;
+  font-family: "Rajdhani", sans-serif;
   font-weight: bold;
   padding-bottom: 1rem;
 }
@@ -379,12 +389,12 @@ div.info-circle {
 }
 
 section.info div:nth-child(1) div.info-circle {
-  background-color: #EE9292;
+  background-color: #ee9292;
   left: 0;
 }
 
 section.info div:nth-child(2) div.info-circle {
-  background-color: #DECF98;
+  background-color: #decf98;
   right: 0;
 }
 
@@ -427,7 +437,9 @@ section.info p:first-of-type {
   }
   div.game {
     width: 100vw;
-    gap: calc(100vw * 0.02); /* Each gap is 2% of the total width to be consistent */
+    gap: calc(
+      100vw * 0.02
+    ); /* Each gap is 2% of the total width to be consistent */
     padding: calc(100vw * 0.02);
   }
   section.info div.text {

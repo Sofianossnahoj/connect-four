@@ -1,7 +1,6 @@
 export function saveWinner(winner, count, ai) {
   const storage = window.localStorage;
   const win = { name: winner, moves: count };
-  console.log(win);
   if (ai) {
     let highscore = storage.getItem('highscoreAI') ?? "[]";
     highscore = JSON.parse(highscore);
@@ -32,7 +31,7 @@ export function getHighscore(ai) {
 function returnTopTen(highscore) {
   highscore = highscore.sort(compare)
   const topTen = [];
-  for (let i = 0; i < 10; i ++) {
+  for (let i = 0; i < 10; i++) {
     if (highscore[i] === undefined) break;
     topTen.push(highscore[i])
   }

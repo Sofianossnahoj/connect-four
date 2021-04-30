@@ -6,5 +6,5 @@ export function playAIPiece(currentPlayer) {
     const random = Math.floor(Math.random() * 7);
     played = playPiece(random, currentPlayer);
   }
-  while(played === false);
+  while (played === false);
 }

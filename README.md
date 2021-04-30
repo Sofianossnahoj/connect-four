@@ -1,4 +1,6 @@
-# connect-four
+# Connect 4
+
+Projektarbete av Jack, MJ, Robin, Sofia och Vic
 
 ## Project setup
 ```

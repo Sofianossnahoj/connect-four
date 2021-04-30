@@ -6,9 +6,7 @@
         <h3>Välkommen till</h3>
         <h1>fyra i rad</h1>
       </section>
-      <router-link class="start-btn" to="/landing">
-        start
-      </router-link>
+      <router-link class="start-btn" to="/landing"> start </router-link>
     </article>
   </main>
 </template>
@@ -24,13 +22,11 @@ export default {
   components: {
     Navigation,
   },
-
   methods: {
     handleView() {
       this.desktopView = window.innerWidth <= 800;
     },
   },
-
   created() {
     this.handleView();
     window.addEventListener("resize", this.handleView);
