@@ -3,9 +3,8 @@
     <Navigation @refresh="refreshPage" />
     <section class="game-info">
       <p>
-        I det klassiska spelet <i>Fyra i rad</i> spelar du för att vinna
-        samtidigt som du måste se upp för motståndarens drag. Välj att spela mot
-        familj och vänner eller mot en bot. Först till fyra i rad vinner!
+        I det klassiska spelet <i>Fyra i rad</i> spelar du för att vinna samtidigt som du måste se upp för motståndarens
+        drag. Välj att spela mot familj och vänner eller mot en bot. Först till fyra i rad vinner!
       </p>
       <!--User chooses to play against bot or another player-->
       <section v-show="playingAlternatives">
@@ -33,11 +32,7 @@
             Välj
           </button>
         </article>
-        <img
-          class="logo-markers"
-          src="../assets/LogoMarkers.svg"
-          alt="Markers"
-        />
+        <img class="logo-markers" src="../assets/LogoMarkers.svg" alt="Markers" />
       </section>
 
       <!-- settings for player 1-->
@@ -146,10 +141,7 @@
             required
           />
         </div>
-        <button
-          class="btn-playingAlternatives"
-          v-on:click="submitPlayerVsBot()"
-        >
+        <button class="btn-playingAlternatives" v-on:click="submitPlayerVsBot()">
           Spelare ok
         </button>
         <p class="error" v-if="error">
@@ -162,16 +154,16 @@
 </template>
 
 <script>
-import Navigation from "../components/Navigation.vue";
+import Navigation from '../components/Navigation.vue';
 
-import { getKey } from "../game/network.js";
+import { getKey } from '../game/network.js';
 
 export default {
   data() {
     return {
-      playerOne: "",
-      playerTwo: "",
-      code: "",
+      playerOne: '',
+      playerTwo: '',
+      code: '',
       playAgainstBot: false,
       settingsplayer1: false,
       settingsplayer2: false,
@@ -202,8 +194,9 @@ export default {
       this.playingAlternatives = false;
     },
     showNetwork() {
-      this.settingsNetwork = true;
-      this.playingAlternatives = false;
+      alert('Network mode has unfortunately been discontinued.');
+      // this.settingsNetwork = true;
+      // this.playingAlternatives = false;
     },
     async getCode() {
       this.code = await getKey();
@@ -219,11 +212,11 @@ export default {
       const payload = {
         playAgainstBot: this.playAgainstBot,
         playerOne: this.playerOne,
-        playerTwo: "Botson",
+        playerTwo: 'Botson',
       };
       if (this.validatePlayer(this.playerOne)) {
-        this.$emit("settings", payload);
-        this.$router.push("/game");
+        this.$emit('settings', payload);
+        this.$router.push('/game');
       }
     },
     submitPlayer1() {
@@ -235,7 +228,7 @@ export default {
       }
     },
     validatePlayer(player) {
-      if (player !== "") {
+      if (player !== '') {
         return true;
       } else {
         this.error = true;
@@ -249,8 +242,8 @@ export default {
         playAgainstBot: this.playAgainstBot,
       };
       if (this.validatePlayer(this.playerTwo)) {
-        this.$emit("settings", payload);
-        this.$router.push("/game");
+        this.$emit('settings', payload);
+        this.$router.push('/game');
         this.settingsplayer2 = false;
         this.error = false;
       }
@@ -259,39 +252,39 @@ export default {
       const payload = {
         networkName: this.playerOne,
         versusNetwork: true,
-        playerOne: " ",
-        playerTwo: " ",
+        playerOne: ' ',
+        playerTwo: ' ',
         code: this.code,
       };
       if (this.code.length === 6) {
-        this.$emit("settings", payload);
-        this.$router.push("/game");
+        this.$emit('settings', payload);
+        this.$router.push('/game');
         this.error = false;
       }
     },
     runBotGame() {
       const payload = {
-        playerOne: "Mr Bot",
-        playerTwo: "Mrs Bot",
+        playerOne: 'Mr Bot',
+        playerTwo: 'Mrs Bot',
         spectateAI: true,
       };
-      this.$emit("settings", payload);
-      this.$router.push("/game");
+      this.$emit('settings', payload);
+      this.$router.push('/game');
     },
   },
   computed: {
     generatedCode() {
       if (this.code.length === 6) {
-        return "Dela med dig av koden till din vän: " + this.code;
+        return 'Dela med dig av koden till din vän: ' + this.code;
       } else {
-        return "";
+        return '';
       }
     },
     networkButton() {
       if (this.code.length === 6) {
-        return "Spela!";
+        return 'Spela!';
       } else {
-        return "Gå med i ett spel!";
+        return 'Gå med i ett spel!';
       }
     },
   },
@@ -318,7 +311,7 @@ main {
   background-color: #424040;
   border-radius: 4px;
   color: #b6d4c6;
-  font-family: "Rajdhani", sans-serif;
+  font-family: 'Rajdhani', sans-serif;
   font-size: 36px;
   justify-content: center;
   align-items: center;
@@ -327,12 +320,12 @@ main {
   cursor: pointer;
 }
 h2 {
-  font-family: "Rajdhani", sans-serif;
+  font-family: 'Rajdhani', sans-serif;
   font-size: 36px;
   color: #424040;
 }
 h3 {
-  font-family: "Rajdhani", sans-serif;
+  font-family: 'Rajdhani', sans-serif;
   font-size: 36px;
   color: #424040;
   margin-bottom: -20px;
@@ -361,7 +354,7 @@ h3 {
 p {
   text-align: center;
   color: #464545;
-  font-family: "Open Sans", sans-serif;
+  font-family: 'Open Sans', sans-serif;
   width: 80%;
   max-width: 800px;
 }
@@ -392,7 +385,7 @@ article {
 }
 
 label {
-  font-family: "Rajdhani", sans-serif;
+  font-family: 'Rajdhani', sans-serif;
   font-size: 36px;
   color: #b6d4c6;
   font-weight: 600;
@@ -402,7 +395,7 @@ label {
   height: 54px;
   border-radius: 7px;
   border-style: none;
-  font-family: "Rajdhani", sans-serif;
+  font-family: 'Rajdhani', sans-serif;
   font-size: 36px;
   color: #424040;
   font-weight: 600;
