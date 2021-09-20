@@ -1,26 +1,26 @@
 # Connect 4
 
-Projektarbete av Jack, MJ, Robin, Sofia och Vic
+School assignment • group project by Jack, Marijune, Robin, Sofia and Victoria
+
+## About
+
+Classic connect four game with different game modes:
+
+- Play against a friend using the same computer
+- Play against a bot
+- ~~Play against a friend via network~~ (backend provided by our teacher is discontinued)
+- Watch two bots play against each other
+
+## Screenshot
+
+![](https://user-images.githubusercontent.com/72305598/134032527-6fb2de57-4721-46cf-8b41-ab618d5de0a3.png)
 
 ## Project setup
-```
-npm install
-```
 
-### Compiles and hot-reloads for development
-```
+```bash
+# Install dependencies
+npm install
+
+# Run development server
 npm run serve
 ```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
